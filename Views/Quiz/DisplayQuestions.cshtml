@@ -1,0 +1,88 @@
+﻿﻿@using IQMania.Models.Quiz;
+@model Category;
+@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+}
+
+<div class="container">
+    <div class="row">
+        <div class="col-10">
+
+            <div class="modal" tabindex="-1" id="dialogdd" data-keyboard="false" data-backdrop="static">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header" style="background-color:cyan">
+                            <h3>Please Select a Category</h3>
+                            
+                        </div>
+                        <div class="modal-body">
+                            
+                                <div class="container">
+
+                                    <select asp-for="Id" asp-items="ViewBag.Categories">
+                                        <option value="">Please Select</option>
+                                    </select>
+                                    <span asp-validation-for="category" class="text-danger"></span>
+                                    <br />
+                                    <br />
+                                    <br />
+                                    <button class="btn btn-success" id="btncat">View Questions</button>
+                                </div>
+                           
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+
+        </div>
+    </div>
+
+
+    <div id="questionlists" style="display:none"></div>
+</div>
+
+
+@section Scripts
+    {
+    <script type="text/javascript">
+        $(function () {
+           
+            var dialogDiv = $("#dialogdd");
+            dialogDiv.dialog();
+        });
+            $("#btncat").on("click",function () {
+                // Get the selected category value
+                var selectedCategory = $("#Id option:selected").val();
+               
+                //jQuery.post({
+                //    url: '/Quiz/categoryWiseQuestions',
+                //    type:'POST',
+                //    contentType: 'application/x-www-form-urlencoded, charset=UTF-8',
+                //    data: { dropdownValuee: selectedCategory },
+                //    success: function () {
+            debugger;
+                    window.location.href="/Quiz/categoryWiseQuestions?id=" + selectedCategory;
+                    //},
+                    //error: function (xhr, textStatus, errorThrown) {
+                    //    // Handle the error response
+                    //    console.log("Error:", errorThrown);
+                    //}
+                //});
+
+
+
+                // Display the selected category in the console (for demonstration purposes)
+                //console.log("Selected category:", selectedCategory);
+                //};
+            });
+        
+
+    </script>
+
+         }
+

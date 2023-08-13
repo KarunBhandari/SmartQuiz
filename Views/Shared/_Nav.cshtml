@@ -1,0 +1,133 @@
+﻿@using Microsoft.AspNetCore.Authorization;
+@using Microsoft.AspNetCore.Http;
+@using Microsoft.AspNetCore.Authentication;
+@using System.Security.Claims;
+@using IQMania.Helper;
+@inject IAuthorizationService AuthorizationService
+
+@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+
+    
+@{
+
+    var userInfo = Context.GetLoginDetails();
+    var name = userInfo?.Name;
+    var email = userInfo?.Email;
+    var phone = userInfo?.Phonenumber;
+    var role = userInfo?.Role;
+
+}
+
+
+<header>
+    <nav class="navbar navbar-expand-lg navbar-light">
+
+        <a class="navbar-brand " href="#">
+            <img src="~/Photos/Icon/logocircle.png" style="width:100px; height:100px; margin-top:0; margin-bottom:0" />
+        </a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <div class="collapse navbar-collapse mynavbar" id="navbarSupportedContent" >
+            <ul class="navbar-nav mr-auto" style="">
+                <li class="nav-item active">
+                    <a class="nav nav-link nav-tabs" href="@Url.Action("Index", "Quiz")">Home</a>
+                </li>
+
+                <li class="nav-item dropdown active">
+                    <a class="nav nav-link nav-tabs" href="@Url.Action("DisplayQuestions", "Quiz")">Category Wise Questions</a>
+                </li>
+                
+                    <li class="nav-item active">
+                    <a class="nav nav-link nav-tabs" href="@Url.Action("PlayQuiz", "Quiz")">Play Quiz</a>
+                    </li>
+                @if (User.Identity.IsAuthenticated)
+
+                {
+                    <li class="nav-item active">
+                        <a class="nav nav-link nav-tabs" href="@Url.Action("AddQuiz", "Quiz")">Add Quiz</a>
+                </li>
+            }
+                @if (userInfo != null && userInfo.Role?.Contains("AdminUser") == true)
+                {
+                    <li class="nav-item active">
+                    <a class="nav nav-link nav-tabs" href="@Url.Action("Panel", "Admin")">Admin Panel
+                    <span class=" ui-icon ui-icon-mail-closed" ></span>
+                    <span id="msgbadge" class="badge"></span>
+                        </a>
+                    </li>
+                }
+                
+            </ul>
+            
+            
+                    <form class="form-inline my-2 ms-4">
+                        <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
+                <button class="btn btn-outline-success nav-link my-2 my-sm-0" type="submit">Search</button>
+                    </form>
+          @if(User.Identity.IsAuthenticated)
+              
+            {
+                <div class="dropdown nav-item">
+                    <a data-toggle="dropdown" class="dropdown-toggle nav-link">
+                   @name
+                    
+                </a>
+                <ul class="dropdown-menu">
+                    <li><a class="nav-link" href="@Url.Action("Logout", "Account")">Logout</a></li>
+                    @*<li><a class="nav-link" href="@Url.Action("#", "Account")"></a></li>*@
+                    
+                </ul>
+                </div>
+            }
+           else
+            {
+                    <div class="dropdown nav-item">
+                    <a data-toggle="dropdown" class="dropdown-toggle nav-link">
+                        Hello! User
+                        
+                    </a>
+                    <ul class="dropdown-menu">
+                        <li><a class="nav-link" href="@Url.Action("Login", "Account")">Login</a></li>
+                        <li><a class="nav-link" href="@Url.Action("Signup", "Account")">Register</a></li>
+
+                    </ul>
+                </div>
+                }
+           
+
+          
+
+        </div>
+    </nav>
+    <script type="text/javascript">
+        
+        $(function() {
+            
+                var xhr = $.ajax({
+                    
+             url: '@Url.Action("Count","Admin")',
+            type: "GET",
+            dataType: "json" // Add this to specify the expected data type
+        });
+
+                xhr.done(function(messages) {
+                    
+                    var resp = messages.quizMessages;
+                    // Assuming the response is an object with a "ResponseDescription" property
+
+                    console.log(messages.responseDescription);
+            $('#msgbadge').html(resp);
+                });
+
+                xhr.fail(function(error) {
+                    console.log(error);
+                });
+            });
+        
+    </script>
+
+</header>

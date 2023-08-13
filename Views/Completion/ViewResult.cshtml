@@ -1,0 +1,91 @@
+﻿@using IQMania.Models;
+@using IQMania.Helper;
+@model IEnumerable<UserResult>
+
+@{
+    var userInfo = Context.GetLoginDetails();
+    var uid = userInfo?.UId;
+    var name = userInfo?.Name;
+    var email = userInfo?.Email;
+    var phone = userInfo?.Phonenumber;
+    
+}
+
+
+<h4>UserResult</h4>
+<div>
+    
+    <hr />
+    <div class="container">
+        <div class="row">
+            <div class="col-md-4 offset-md-4 col-sm-12" style="background-color:lawngreen; text-align:center">
+                <h3 style="color:rebeccapurple">IQ Mania</h3>
+                <h4>Status report for the practice quiz set</h4>
+            </div>
+            <table>
+                <tr>
+                    <th>User Id:</th>
+                    <td><p>@uid<p></td>
+                </tr>
+                <tr>
+                    <th>Name:</th>
+                    <td><p>@name</p></td>
+                </tr>
+                <tr>
+                    <th>Email:</th>
+                    <td><p>@email</p></td>
+                    <th>Contact:</th>
+                    <td><p>@phone</p></td>
+                </tr>
+            </table>
+        </div>
+    </div>
+    <div class="container">
+        <table class="table table-bordered" style="border-width:2px">
+            <tr>
+                <th class = "col-1 hidden-sm">
+                    @Html.DisplayNameFor(model => model.QId)
+                </th>
+                <th class="col-5 col-sm-6">
+                        @Html.DisplayNameFor(model => model.Question)
+                </th>
+                <th class="col-2">
+                        @Html.DisplayNameFor(model => model.Answer)
+                </th>
+                <th class="col-2">
+                        @Html.DisplayNameFor(model => model.SubmittedAnswer)
+                </th>
+                <th class="col-2">
+                        @Html.DisplayNameFor(model => model.IsCorrect)
+                </th>
+                @foreach (var item in Model)
+                {
+                <tr>    
+        <td >
+                @Html.DisplayFor(model => item.QId)
+        </td>
+        
+            <td>
+                @Html.DisplayFor(model => item.Question)
+        </td>
+       
+            <td>
+                @Html.DisplayFor(model => item.Answer)
+        </td>
+        
+            <td>
+                @Html.DisplayFor(model => item.SubmittedAnswer)
+        </td>
+        
+            <td>
+                @Html.DisplayFor(model => item.IsCorrect)
+        </td>
+    </tr>
+    }
+        </table>
+    </div>
+</div>
+<div>
+    @Html.ActionLink("Edit", "Edit", new { /* id = Model.PrimaryKey */ }) |
+    <a asp-action="Index" asp-controller="Quiz">Back to List</a>
+</div>

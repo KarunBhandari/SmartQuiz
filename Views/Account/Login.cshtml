@@ -1,0 +1,38 @@
+﻿@using IQMania.Models.Account;
+@model Login
+
+@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+    //<h3 class="text-danger">@ViewBag.Message</h3>
+}
+<h3 class="text-danger">@ViewBag.Message</h3>
+<div class="container">
+    <div class="row">
+        <div class="col-md-6 offset-md-3 col-sm-12">
+            <form asp-action="Login" asp-controller="Account" method="post">
+                <div class="form-group">
+                    <label for="Name">Full Name</label>
+                    <input type="text" class="form-control border-dark" asp-for="Name" placeholder="Enter Full Name" />
+                    <span asp-validation-for="Name" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label for="Email">Email</label>
+                    <input type="email" class="form-control border-dark" asp-for="Email" placeholder="Enter Email" />
+                    <span asp-validation-for="Email" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label for="Password">Password</label>
+                   <input type="password" class="form-control border-dark" asp-for="Password" placeholder="Enter Password" />
+                    <span asp-validation-for="Password" class="text-danger"></span>
+                    <span><a href ="@Url.Action("ForgotPassword","Account")" class="text-info">@ViewBag.Pass</a></span>
+                </div>
+                <button class="btn btn-primary" type="submit">Login</button>
+                <button class="btn btn-info" asp-action="Signup" asp-controller="Account" formmethod="get">Register Instead?</button>
+                
+             </form>
+         
+        </div>
+    </div>
+</div>

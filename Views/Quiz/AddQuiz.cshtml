@@ -1,0 +1,138 @@
+﻿@model IQMania.Models.Quiz.AddQuiz
+
+@{
+    ViewData["Title"] = "Please Confirm the quiz you add won't exists already!!";
+}
+
+<h1 id="adwarning" class="text-danger">@ViewData["Title"]</h1>
+
+<div id="addquizresponse" class="alert">
+</div>
+<hr />
+<div class="row">
+    <div class="col-12">
+        <form method="post" id="myForm" asp-action="AddQuiz" asp-controller="Quiz">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="QuizQuestion" class="control-label">QuizQuestion</label>
+                <textarea asp-for="QuizQuestion" id="QuizQuestiontxt" class="form-control col-12" ></textarea>
+                <span asp-validation-for="QuizQuestion" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="QuizAnswer" class="control-label"></label>
+                <input asp-for="QuizAnswer" class="form-control col-6" />
+                <span asp-validation-for="QuizAnswer" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Category" class="control-label"></label>
+                <input asp-for="Category" class="form-control col-6" />
+                <span asp-validation-for="Category" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Option1" class="control-label"></label>
+                <input asp-for="Option1" class="form-control col-6" />
+                <span asp-validation-for="Option1" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Option2" class="control-label"></label>
+                <input asp-for="Option2" class="form-control col-6" />
+                <span asp-validation-for="Option2" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Option3" class="control-label"></label>
+                <input asp-for="Option3" class="form-control col-6" />
+                <span asp-validation-for="Option3" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Option4" class="control-label"></label>
+                <input asp-for="Option4" class="form-control col-6" />
+                <span asp-validation-for="Option4" class="text-danger"></span>
+            </div>
+
+            <div class="form-group">
+                <input type="submit" value="Create" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-action="Index">Back to Home</a>
+</div>
+
+@section Scripts {
+  
+    <script type="text/javascript">
+        $(function(){
+            ClassicEditor
+                .create(document.querySelector('#QuizQuestiontxt'), {
+                    keystrokes: {
+                        // Prevent default Tab behavior and insert a tab character
+                        tab: false,
+                        'ctrl+tab': false,
+                        'shift+tab': false
+                    }
+                });
+        
+
+        
+      debugger
+        $("#myForm").submit(function (event) {
+            // Prevent the default form submission behavior
+            event.preventDefault();
+
+            // Serialize the form data into a format that can be sent via AJAX
+            const addQuiz = $(this).serialize();
+
+            // Send the AJAX request
+            var xhr = $.ajax({
+                type: "POST",
+                url: "@Url.Action("AddQuiz","Quiz")",
+                data: addQuiz
+            });
+
+
+            xhr.done(function (response) {
+                
+                if (response.responseCode == 200) {
+                    $("#addquizresponse")
+                        
+                        .removeClass('alert-danger')
+                        .addClass('alert-success')
+                        .html(response.responseDescription);
+                }
+                else {
+                    $("#addquizresponse")
+                        
+                        .removeClass('alert-success')
+                        .addClass('alert-danger')
+                        .html(response.responseDescription);
+                }
+               
+                $("#myForm")[0].reset();
+            });
+
+
+            function addQuizSuccess(response) {
+
+                var Quizresponse = response.ResponseDescription;
+                if (response.ResponseCode == 200) {
+                    // Response is successful
+                    
+                    alert(Quizresponse);
+                    $("#addquizresponse p").removeClass("text-danger").addClass("text-success").html(response.ResponseDescription);
+                } else {
+                    // Response is not successful (error)
+                    $("#addquizresponse p").removeClass("text-success").addClass("text-danger").html(response.ResponseDescription);
+                }
+            }
+            function addQuizerror(response) {
+                alert("An error occured please contact service provider");
+            }
+
+        });
+        });
+        
+    </script>
+
+}

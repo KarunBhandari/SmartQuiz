@@ -1,0 +1,45 @@
+﻿@using IQMania.Models.Account;
+@model Signup
+ 
+@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+}
+<div class="container">
+    <div class="row">
+        <div class="col-md-6 offset-md-3 col-sm-12">
+            <form asp-action="Signup" asp-controller="Account" method="post" >
+             <div class="form-group">
+                 <label for="Name">Full Name</label>
+                 <input type="text" class="form-control border-dark" asp-for="Name" placeholder="Enter Full Name" />
+                 <span asp-validation-for="Name" class="text-danger"></span>
+             </div>
+             <div class="form-group">
+                 <label for="Email">Email</label>
+                    <input type="email" class="form-control border-dark" asp-for="Email" placeholder="Enter Email" />
+                 <span asp-validation-for="Email" class="text-danger"></span>
+             </div>
+             <div class="form-group">
+                 <label for="Phonenumber">Phonenumber</label>
+                    <input type="text" class="form-control border-dark" asp-for="Phonenumber" placeholder="Enter Phonenumber" />
+                 <span asp-validation-for="Phonenumber" class="text-danger"></span>
+             </div>
+             <div class="form-group">
+                 <label for="Password">Password</label>
+                    <input type="password" class="form-control border-dark" asp-for="Password" placeholder="Enter Password" />
+                 <span asp-validation-for="Password" class="text-danger"></span>
+             </div>
+             <div class="form-group">
+                 <label for="ConfirmPassword">Confirm Password</label>
+                    <input type="password" class="form-control border-dark" asp-for="ConfirmPassword" placeholder="Enter Password Again" />
+                 <span asp-validation-for="ConfirmPassword" class="text-danger"></span>
+             </div>
+        <button class="btn btn-info" type="submit">Register</button>
+                <button class="btn btn-primary" asp-action="Login" asp-controller="Account" formmethod="get">Login Instead?</button>
+
+            </form>
+           
+        </div>
+    </div>
+</div>

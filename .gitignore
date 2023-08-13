@@ -1,0 +1,10 @@
+﻿################################################################################
+# This .gitignore file was automatically created by Microsoft(R) Visual Studio.
+################################################################################
+
+/.vs/IQMania/DesignTimeBuild/.dtbcache.v2
+/.vs/IQMania/FileContentIndex/0ce9bb12-69f4-4227-8d56-4eba0221442d.vsidx
+/.vs/IQMania/FileContentIndex/1237d612-4eac-427e-80d1-797ccfda7f30.vsidx
+/.vs/IQMania/FileContentIndex/e1e8ec51-c74d-43f5-a564-da3fd679e76a.vsidx
+/.vs/IQMania/v17/.futdcache.v2
+/.vs/IQMania/v17/.suo
