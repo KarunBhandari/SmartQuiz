@@ -25,6 +25,7 @@
                 <div class="form-group">
                     <label for="Password">Password</label>
                    <input type="password" class="form-control border-dark" asp-for="Password" placeholder="Enter Password" />
+                   <i class=" bi bi"></i>
                     <span asp-validation-for="Password" class="text-danger"></span>
                     <span><a href ="@Url.Action("ForgotPassword","Account")" class="text-info">@ViewBag.Pass</a></span>
                 </div>
@@ -36,3 +37,10 @@
         </div>
     </div>
 </div>
+
+                    @section Scripts{
+                        <script type="text/javascript">
+                            
+                        </script>
+                        
+                    }
