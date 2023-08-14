@@ -27,50 +27,59 @@ namespace IQMania.Repository
             try {
 
                 var response = connection1.ExecuteDataRow(Sql);
-
+                if(response.Table.Rows != null )
+                {
+                    var dbRes = response.Table.Rows[0];
+                    responseResult.ResponseCode = Convert.ToInt32(dbRes["ResponseCode"]);
+                    responseResult.ResponseDescription = Convert.ToString((dbRes["ResponseDescription"]).ToString());
+                }
              
-                //_ = sqlCommand.ExecuteNonQuery();
+                
             }
-            catch (Exception ex) { }
+            catch (Exception ex) {
+                responseResult.ResponseDescription = ex.Message;
+            }
 
-            return new ResponseResult { ResponseCode = 200 };
+            return responseResult;
         }
 
         public Account Login(Login login)
         {
+            
             Account account = new Account();
-            string Sql = "Exec spGetLogininfo ";
+            string Sql = "Exec spGetLogininfo @flag='AuthLogin',";
             Sql += " @Email = " + connection1.FilterString(login.Email);
-            Sql += " ,@Password = " + connection1.FilterString(login.Password);
+            Sql += ", @Password = " + connection1.FilterString(login.Password);
             
             try{
 
-                var reader = connection1.ExecuteDataRow(Sql);
+                var reader = connection1.ExecuteDataset(Sql);
+                if (reader.Tables[1] != null) {
+                    var dbRes = reader.Tables[1];
+                    account.ResponseCode = Convert.ToInt32(dbRes.Rows[0]["ResponseCode"]);
+                    account.ResponseDescription = (dbRes.Rows[0]["ResponseDescription"]).ToString();
+                        }
 
                 
-                int rows = 0;
-                
-                    
-                    rows++;
-                    if (rows == 1)
+                    if (account.ResponseCode == 302)
                     {
-                        account.UId = reader["Id"].ToString();
-                        account.Email = reader["Email"].ToString();
-                        account.Name = reader["FullName"].ToString();
-                        account.Phonenumber = reader["Phone"].ToString();
-                        account.Role = reader["Role"].ToString();
-                        return account;
+                    var dbRes1 = reader.Tables[0];
+
+                        account.UId = (dbRes1.Rows[0]["Id"].ToString());
+                        account.Email = (dbRes1.Rows[0]["Email"].ToString());
+                        account.Name = (dbRes1.Rows[0]["FullName"].ToString());
+                        account.Phonenumber = (dbRes1.Rows[0]["Phone"].ToString());
+                        account.Role = (dbRes1.Rows[0]["Role"].ToString());
+                        
                     }
-                    
                 
-                account.ResponseCode = 404;
-                account.ResponseDescription = "User Not Found";
-                return account;
             }
-            catch {
-                return account;
+            catch(Exception ex) {
+                account.ResponseDescription = ex.Message.ToString();
+                
             }
-            
+            return account;
+
         }
 
         public ResponseResult ChangePassword(Signup signup)

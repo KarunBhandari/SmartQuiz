@@ -18,10 +18,14 @@ html {
     margin-right:7px;
 }
 
-    a.nav.nav-link.nav-tabs::before{
-        content: none; /* Some Unicode character or icon code */
-        /* Other styles */
-    }
+.mynavitem{
+    margin-right: 0;
+}
+
+a.nav.nav-link.nav-tabs::before {
+    content: none; /* Some Unicode character or icon code */
+    /* Other styles */
+}
 
     a.nav-link::before{
         content: none;

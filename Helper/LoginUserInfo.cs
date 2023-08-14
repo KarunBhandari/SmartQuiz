@@ -12,8 +12,8 @@ namespace IQMania.Helper
             
             var model = new Account();
 
-                 model.UId = context.User.FindFirst("UserId")?.Value.ToString();
-                 model.Name = context.User.FindFirst("Name")?.Value.ToString();
+                model.UId = context.User.FindFirst("UserId")?.Value.ToString();
+                model.Name = context.User.FindFirst("Name")?.Value.ToString();
                 model.Email = context.User.FindFirst("Email")?.Value.ToString();
                 model.Phonenumber = context.User.FindFirst("Phone")?.Value.ToString();
                 model.Role = context.User.FindFirst("Role")?.Value.ToString() ?? string.Empty;

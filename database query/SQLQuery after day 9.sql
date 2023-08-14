@@ -8,15 +8,32 @@ Create table tblAccount(Id int Primary Key identity, FullName nvarchar(55), Emai
  Set Role='AdminUser'
  where Id=1
  
- Alter procedure spcreateUser  
- @Fullname nvarchar(55), @Email nvarchar(35),  
- @Password nvarchar(12), @Phone bigint, @flag nvarchar(15)  
- As  
- Begin  
- If(@flag='Signup')  
-  Insert into tblAccount (FullName, Email, Phone, Password)   
-  values  
-  (@FullName, @Email,@Phone, @Password)  
+ Alter procedure spcreateUser
+ @Fullname nvarchar(55), @Email nvarchar(35),
+ @Password nvarchar(12), @Phone bigint, @flag nvarchar(15)
+ As
+ Begin
+ Declare @responsecode int 
+ Declare @responsedescription nvarchar(70)
+  
+  Begin Try
+	 If(@flag='Signup')
+	 Begin
+	   Insert into tblAccount (FullName, Email, Phone, Password) 
+	   values
+	   (@FullName, @Email,@Phone, @Password)
+	   Set @responsecode = 201; Set @responsedescription = 'Successfully created user'
+	End
+	Else
+	 Begin
+	 Set @responsecode = 401; Set @responsedescription = 'Unauthorized request for creation'
+	 
+	End
+ End Try
+ Begin Catch
+	Set @responsecode = 400; Set @responsedescription = 'Bad request for creation'
+ End Catch
+ Select @responsecode as ResponseCode, @responsedescription as ResponseDescription
 End
 Exec sp_helptext spcreateUser
 
