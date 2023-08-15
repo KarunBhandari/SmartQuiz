@@ -1,5 +1,5 @@
 Exec sp_helptext spAddUserQuestion
-CREATE procedure spAddUserQuestion @Questions nvarchar(300), @Answer nvarchar(70), @Category nvarchar(15),     
+Create procedure spAddUserQuestion @Questions nvarchar(300), @Answer nvarchar(70), @Category nvarchar(15),     
  @Option1 nvarchar(70), @Option2 nvarchar(70), @Option3 nvarchar(70), @Option4 nvarchar(70),  
  @flag nvarchar(15)  
  As  
@@ -68,7 +68,7 @@ End
 ---------------------------------------------------------------------------------------
 
 Exec sp_helptext spGetLogininfo
-CREATE procedure spGetLogininfo  
+Alter procedure spGetLogininfo  
 @Email nvarchar(35),  
  @Password nvarchar(12),  
  @flag nvarchar(15)  
