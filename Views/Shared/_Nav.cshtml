@@ -96,12 +96,12 @@
                 </div>
                 </ul>
             
-               <form class="form d-inline my-2 ms-1">
-                        <input class="form-control" type="search" placeholder="Search" aria-label="Search">
-                <button class="btn btn-outline-success nav-link my-lg-2 my-sm-0" type="submit">Search</button>
+               <form class="d-inline my-2 ms-1" asp-action= "Search" asp-controller="Quiz" >
+                        <input id="Search" class="form-control" type="search" placeholder="Search" aria-label="Search">
+                    <button class="btn btn-outline-success nav-link col-2 offset-4 my-lg-2 my-sm-0" type="submit">Search</button>
                     </form>
-            
-           
+
+                
 
           
 
@@ -111,7 +111,7 @@
     <script type="text/javascript">
         
         $(function() {
-            
+                
                 var xhr = $.ajax({
                     
              url: '@Url.Action("Count","Admin")',
@@ -132,6 +132,9 @@
                     console.log(error);
                 });
             });
+
+            
+               
         
     </script>
 

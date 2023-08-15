@@ -18,8 +18,8 @@ namespace IQMania.Controllers
         }
 
 
-        List<Category> categories = new List<Category>
-            {
+       readonly List<Category> categories = new()
+       {
                 new Category{ Id = 0, category = "History" },
                 new Category{ Id = 1, category = "Geography" },
                 new Category{ Id = 2, category = "Economy" },
@@ -39,7 +39,7 @@ namespace IQMania.Controllers
         }
 
 
-        public IActionResult categoryWiseQuestions(int id)
+        public IActionResult CategoryWiseQuestions(int id)
         {
 
             Category categoryy = categories[id];
@@ -54,14 +54,14 @@ namespace IQMania.Controllers
         [Authorize]
         public IActionResult AddQuiz()
         {
-            AddQuiz addQuiz = new AddQuiz();
-            return View(addQuiz);
+            
+            return View();
         }
 
 
         public JsonResult AddQuiz(AddQuiz addQuiz)
         {
-            ResponseResult response = new ResponseResult();
+            ResponseResult response = new();
             if (ModelState.IsValid)
             {
 
@@ -91,11 +91,14 @@ namespace IQMania.Controllers
 
             return Json(response);
         }
-
-        public JsonResult Search(string query)
+        [HttpPost]
+        public async Task<IActionResult> Search(string query)
         {
+            SearchResult qstn = await _quizRepository.SearchQuestions(query);
+           if(qstn.ResponseCode != 200)
+            {ViewBag.Message= qstn.ResponseDescription.ToString(); }
 
-            return Json(Search);
+            return View(qstn);
         }
 
 

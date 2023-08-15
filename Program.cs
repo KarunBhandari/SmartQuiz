@@ -79,7 +79,7 @@ app.Run();//(async(HttpContext context)// =>
 //{
 //    string method = context.Request.Method;
 //    string Path = context.Request.Path;
-//    if(method=="Get"&& Path=="/categoryWiseQuestions")
+//    if(method=="Get"&& Path=="/CategoryWiseQuestions")
 //    {
 //        string id = "";
 //        string name = "";

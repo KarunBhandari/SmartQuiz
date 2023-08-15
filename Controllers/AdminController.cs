@@ -11,7 +11,7 @@ namespace IQMania.Controllers
     
     public class AdminController : Controller
     {
-        private IAdminServices? _adminRepository;
+        private readonly IAdminServices _adminRepository;
         public AdminController(IAdminServices adminRepository)
         {
             _adminRepository = adminRepository;
@@ -29,7 +29,7 @@ namespace IQMania.Controllers
             var role = userinfo?.Role;
 
             Messages messages = new();
-            if (userinfo != null && userinfo.Role?.Contains("AdminUser") == true)
+            if (userinfo != null && role?.Contains("AdminUser") == true)
             {
 
                 messages = _adminRepository.GetAdminMessages();

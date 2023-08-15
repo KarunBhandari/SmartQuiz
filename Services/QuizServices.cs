@@ -9,13 +9,15 @@ using Microsoft.CodeAnalysis.Elfie.Diagnostics;
 using Microsoft.AspNetCore.Http;
 using System.Xml.Linq;
 using System.Net.Http;
+using Repository;
 
 namespace IQMania.Repository
 {
     public class QuizServices : IQuizServices
     {
+       readonly Dao connection1;
         private readonly IHttpContextAccessor _contextAccessor;
-        private string? Constr { get; set; }
+        private string Constr { get; set; }
         
         public IConfiguration configuration;
 
@@ -24,7 +26,7 @@ namespace IQMania.Repository
             _contextAccessor = accessor;
             configuration = _configuration;
             Constr = configuration.GetConnectionString("DefaultConnection");
-        
+            connection1 = new Dao();
         }
        
         public List<QuestionOptions> GetQuestions()
@@ -129,36 +131,7 @@ namespace IQMania.Repository
             return response;
         }
 
-        /* public responseResult AddUserTable(HttpContext httpContext)
-          {
-              responseResult Result = new responseResult();
-              using (SqlConnection con = new SqlConnection(constr))
-              {
-
-                  int UserID = Convert.ToInt32(httpContext.Session.GetInt32("UID"));
-                  if (!(UserID==0))
-                  { 
-                  //    SqlCommand cmd = new SqlCommand("spCreateEvaluationTable", con);
-                  //  cmd.CommandType = CommandType.StoredProcedure;
-                  //cmd.Parameters.AddWithValue("@UID", UserID);
-                  //  con.Open() ;
-                  //    int status = cmd.ExecuteNonQuery();
-                      Result.ResponseCode = 200;
-                      Result.ResponseDescription = "OK";
-                      return Result;
-                  }
-              }
-
-              {
-                  Result.ResponseCode = 401;
-                  Result.ResponseDescription = "Unauthorized User.";
-              }
-            return Result;
-          }
-
-         */
-
-
+        
 
         public QuestionOptions TestResult(QuizRequestModel quizRequestModel,HttpContext httpContext)
         {
@@ -201,15 +174,48 @@ namespace IQMania.Repository
             return result;
         }
 
-        public Questions SearchQuestions(string query)
+        public async Task<SearchResult> SearchQuestions(string query)
         {
+            Questions qstn = new();
+            SearchResult questions = new();
+            string sql = "Exec spSearchquestiontext @flag = 'Search'";
+            sql += ", @@inputtext = " + query.ToString();
             try
             {
-                string? sql = "Exec spGetQuestions @flag = 'All'";
+                var response = connection1.ExecuteDataset(sql);
+                if(response != null)
+                {
+                    var dbres = response.Tables[1];
+                    questions.ResponseCode = Convert.ToInt32(dbres.Rows[0]["ResponseCode"]);
+                    questions.ResponseDescription = (dbres.Rows[1]["ResponseDescription"]).ToString();
+
+                    if(questions.ResponseCode == 200)
+                    {
+                        var dbres1 = response.Tables[0];
+                        int i = 0;
+                        foreach(DataRow row in dbres1.Rows) {
+                            i= i++;
+                            questions.Questions.Add(new Questions()
+                            {
+                                QID = i,
+                                Question = (row["Questions"]).ToString(),
+                                Answer = (row["Questions"]).ToString(),
+                                
+                            });
+
+                        }
+                        
+                    }
+                    
+                }
+                
             }
-            catch { }
-            Questions result = new Questions();
-            return result;
+            catch(Exception ex) {
+                  questions.ResponseDescription = ex.Message; 
+            
+            }
+            
+            return questions;
         }
     }
 }

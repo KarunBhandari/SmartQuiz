@@ -9,7 +9,7 @@ namespace IQMania.Repository
 {
     public class AccountServices : IAccountServices
     {
-        Dao connection1;
+       readonly Dao connection1;
       
 
         public AccountServices()
@@ -18,7 +18,7 @@ namespace IQMania.Repository
         }
         public ResponseResult Signup(Signup signup)
         {
-            ResponseResult responseResult = new ResponseResult();
+            ResponseResult responseResult = new();
             string Sql = "Exec spcreateUser @flag = 'Signup'";
             Sql += " ,@Fullname= " + connection1.FilterString(signup.Name);
             Sql += " ,@Email= " + connection1.FilterString(signup.Email);
@@ -46,7 +46,7 @@ namespace IQMania.Repository
         public Account Login(Login login)
         {
             
-            Account account = new Account();
+            Account account = new();
             string Sql = "Exec spGetLogininfo @flag='AuthLogin',";
             Sql += " @Email = " + connection1.FilterString(login.Email);
             Sql += ", @Password = " + connection1.FilterString(login.Password);
@@ -91,7 +91,7 @@ namespace IQMania.Repository
             };
             try
             {
-                string? sql = "Exec spEditprofile @flag = 'changepass'";
+                string sql = "Exec spEditprofile @flag = 'changepass'";
                 sql += ",@Fullname=" + connection1.FilterString(signup.Name);
                 sql += ",@Email=" + connection1.FilterString(signup.Email);
                 sql += ",@Phone=" + connection1.FilterString(signup.Phonenumber);

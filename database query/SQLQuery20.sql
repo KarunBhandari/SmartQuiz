@@ -92,7 +92,8 @@ As
 End
 
 ---------------------------------
-Create procedure spSearchquestiontext
+
+Alter procedure spSearchquestiontext
 @inputtext nvarchar(200), @flag nvarchar(15)
 As
 Begin
@@ -100,22 +101,23 @@ Begin
 	If(@flag = 'Search')
 		Begin
 		If Exists(SELECT *
-				  FROM tblQuestions
+				  FROM tblQuestions (nolock)
 				  WHERE LOWER(Questions) LIKE LOWER('%' + @inputtext + '%')
 				  OR LOWER(Answer) LIKE LOWER('%' + @inputtext + '%'))
 			Begin
 				SELECT *
-				FROM tblQuestions
+				FROM tblQuestions (nolock)
 				WHERE LOWER(Questions) LIKE LOWER('%' + @inputtext + '%')
 				   OR LOWER(Answer) LIKE LOWER('%' + @inputtext + '%');
-				Set @responsecode= 200; Set @responsecode = 'Search Completed'
+				Set @responsecode= 200; Set @responsedescription = 'Search Completed'
 			End
 		Else
 		 Begin
-			Set @responsecode= 404; Set @responsecode = 'Search Text Not Found'
+			Set @responsecode= 404; Set @responsedescription = 'Search Text Not Found'
 		 End
 	End
-	Select @responsecode as ResponseCode, @responsedescription as Responsedescription
+	Select @responsecode as ResponseCode, @responsedescription as ResponseDescription
 End
 
-Exec sp
+
+Exec spSearchquestiontext 'Nepal', 'Search'

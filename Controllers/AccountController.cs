@@ -17,11 +17,11 @@ namespace IQMania.Controllers
 {
     public class AccountController : Controller
     {
-        public const string? SessionKeyName = "Name";
-        public const string? SessionKeyEmail = "Email";
-        public const string? SessionKeyPhone = "PhoneNumber";
-        public const string? SessionKeyUser = "UID";
-        public const string? Role = "Role";
+        public const string SessionKeyName = "Name";
+        public const string SessionKeyEmail = "Email";
+        public const string SessionKeyPhone = "PhoneNumber";
+        public const string SessionKeyUser = "UID";
+        public const string Role = "Role";
         private readonly IAccountServices _accountrepository;
         public AccountController(IAccountServices accountrepository)
         {
@@ -84,7 +84,7 @@ namespace IQMania.Controllers
                                       ExpiresUtc = DateTime.UtcNow.AddMinutes(30)
                                   });
 
-                    string? ReturnUrl = TempData["ReturnUrl"] as string;
+                    string ReturnUrl = TempData["ReturnUrl"] as string;
 
                     if (!string.IsNullOrEmpty(ReturnUrl))
                     {
@@ -101,7 +101,7 @@ namespace IQMania.Controllers
         }
 
         [HttpGet]
-        public IActionResult Login(string? ReturnUrl)
+        public IActionResult Login(string ReturnUrl)
         {
             TempData["ReturnUrl"] = ReturnUrl;
             return View();
