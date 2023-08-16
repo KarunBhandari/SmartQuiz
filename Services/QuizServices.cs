@@ -174,7 +174,7 @@ namespace IQMania.Repository
             return result;
         }
 
-        public async Task<SearchResult> SearchQuestions(string query)
+        public async Task<SearchResult> SearchQuestionsAsync(string query)
         {
             Questions qstn = new();
             SearchResult questions = new();
@@ -182,7 +182,7 @@ namespace IQMania.Repository
             sql += ", @@inputtext = " + query.ToString();
             try
             {
-                var response = connection1.ExecuteDataset(sql);
+                var response = await Task.Run(() => connection1.ExecuteDataset(sql));
                 if(response != null)
                 {
                     var dbres = response.Tables[1];

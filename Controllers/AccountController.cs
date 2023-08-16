@@ -22,10 +22,14 @@ namespace IQMania.Controllers
         public const string SessionKeyPhone = "PhoneNumber";
         public const string SessionKeyUser = "UID";
         public const string Role = "Role";
+
+        private readonly ILogger<AccountController> _logger;
         private readonly IAccountServices _accountrepository;
-        public AccountController(IAccountServices accountrepository)
+        public AccountController(IAccountServices accountrepository, ILogger<AccountController> logger)
         {
+            _logger = logger;
             _accountrepository = accountrepository;
+            _logger.LogInformation("Account Controller Called");
         }
 
         [HttpGet]
@@ -90,7 +94,7 @@ namespace IQMania.Controllers
                     {
                         return Redirect(ReturnUrl);
                     }
-                  
+                    _logger.LogInformation("Login page browsed by: {0}, ", account.Name);
                     return RedirectToAction("Index", "Quiz");
 
                 }

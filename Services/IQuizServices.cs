@@ -13,7 +13,7 @@ namespace IQMania.Repository
 
         QuestionOptions TestResult(QuizRequestModel quizRequestModel, HttpContext httpContext);
 
-        Task<SearchResult> SearchQuestions(string query);
+        Task<SearchResult> SearchQuestionsAsync(string query);
 
 
     }

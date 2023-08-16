@@ -91,18 +91,21 @@ namespace IQMania.Controllers
 
             return Json(response);
         }
+
         [HttpPost]
-        public async Task<IActionResult> Search(string query)
+        public async Task<JsonResult> Search(string query)
         {
-            SearchResult qstn = await _quizRepository.SearchQuestions(query);
+            SearchResult qstn = new();
+            if (string.IsNullOrEmpty(query))
+            {
+                qstn.ResponseDescription = "Please Enter Something to Search";
+                return Json(qstn);
+            }
+             qstn = await _quizRepository.SearchQuestionsAsync(query);
            if(qstn.ResponseCode != 200)
             {ViewBag.Message= qstn.ResponseDescription.ToString(); }
 
-            return View(qstn);
+            return Json(qstn);
         }
-
-
     }
-
-
 }

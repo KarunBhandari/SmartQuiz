@@ -3,11 +3,13 @@ using IQMania.Repository.Completion;
 using Microsoft.AspNetCore.Authentication.Cookies;
 using IQMania.Repository.AdminRepository;
 using Repository;
+using Serilog;
 
 var builder = WebApplication.CreateBuilder(args);
 var configuration = builder.Configuration;
 Configurationmanager.SetConfiguration(configuration);
 
+builder.Host.UseSerilog((context, configuration) => configuration.ReadFrom.Configuration(context.Configuration));
 
 // Add services to the container.
 
@@ -61,7 +63,7 @@ else
     
 }
 
-
+app.UseSerilogRequestLogging();
 app.UseStaticFiles();
 
 //app.UseCookiePolicy();

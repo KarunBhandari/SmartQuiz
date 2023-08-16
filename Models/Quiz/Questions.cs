@@ -14,6 +14,7 @@ namespace IQMania.Models.Quiz
  
     public class SearchResult: ResponseResult
     {
+
         public List<Questions> Questions { get; set;}
     }
 }

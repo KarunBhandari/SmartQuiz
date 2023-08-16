@@ -9,7 +9,7 @@
     For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 *@
 
-    
+
 @{
 
     var userInfo = Context.GetLoginDetails();
@@ -22,120 +22,180 @@
 
 
 <header>
-   <div class="row">
-    <nav class="navbar">
+    <div class="row">
+        <nav class="navbar">
 
-            
-     <img class=" img-fluid d-none d-sm-block" href="@Url.Action("Index", "Quiz")" src="~/Photos/Icon/logocircle.png" style="width:100px; height:100px; margin-top:0; margin-bottom:0" />
-        
-        <button class=" navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
-        </button>
-        
-        <div class="collapse navbar-collapse navbar-expand-md navbar-expand-md mynavbar" id="navbarSupportedContent" >
-            <ul class="navbar-nav mr-auto" style="">
-                <li class="nav-item active">
-                    <a class="nav nav-link nav-tabs" href="@Url.Action("Index", "Quiz")">Home</a>
-                </li>
 
-                <li class="nav-item dropdown active">
-                    <a class="nav nav-link nav-tabs" href="@Url.Action("DisplayQuestions", "Quiz")">Category Wise Questions</a>
-                </li>
-                
-                <li class="nav-item active">
-                    <a class="nav nav-link nav-tabs" href="@Url.Action("PlayQuiz", "Quiz")">Play Quiz</a>
-                </li>
-                @if (User.Identity.IsAuthenticated)
+            <img class=" img-fluid d-none d-sm-block" href="@Url.Action("Index", "Quiz")" src="~/Photos/Icon/logocircle.png" style="width:100px; height:100px; margin-top:0; margin-bottom:0" />
 
-                {
-                 <li class="nav-item active">
-                        <a class="nav nav-link nav-tabs" href="@Url.Action("AddQuiz", "Quiz")">Add Quiz</a>
-                 </li>
-                }
-                @if (userInfo != null && userInfo.Role?.Contains("AdminUser") == true)
-                {
+            <button class=" navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+
+            <div class="collapse navbar-collapse navbar-expand-md navbar-expand-md mynavbar" id="navbarSupportedContent">
+                <ul class="navbar-nav mr-auto" style="">
                     <li class="nav-item active">
-                    <a class="nav nav-link nav-tabs" href="@Url.Action("Panel", "Admin")">Admin Panel
-                    <span class=" ui-icon ui-icon-mail-closed" ></span>
-                    <span id="msgbadge" class="badge"></span>
-                        </a>
+                        <a class="nav nav-link nav-tabs" href="@Url.Action("Index", "Quiz")">Home</a>
                     </li>
-                }
-                
-            
-                <div class="dropdown nav-item mynavitem">
+
+                    <li class="nav-item dropdown active">
+                        <a class="nav nav-link nav-tabs" href="@Url.Action("DisplayQuestions", "Quiz")">Category Wise Questions</a>
+                    </li>
+
+                    <li class="nav-item active">
+                        <a class="nav nav-link nav-tabs" href="@Url.Action("PlayQuiz", "Quiz")">Play Quiz</a>
+                    </li>
                     @if (User.Identity.IsAuthenticated)
 
                     {
-
-                        <a data-toggle="dropdown" class="dropdown-toggle nav-link">
-                            @name
-
-                        </a>
-                        <ul class="dropdown-menu">
-                            <li><a class="nav-link" href="@Url.Action("Logout", "Account")">Logout</a></li>
-                            <li><a class="nav-link" href="@Url.Action("#", "Account")"></a></li>
-
-                        </ul>
-
+                        <li class="nav-item active">
+                            <a class="nav nav-link nav-tabs" href="@Url.Action("AddQuiz", "Quiz")">Add Quiz</a>
+                        </li>
                     }
-                    else
+                    @if (userInfo != null && userInfo.Role?.Contains("AdminUser") == true)
                     {
-
-                        <a data-toggle="dropdown" class="dropdown-toggle nav-link">
-                            Hello! User
-
-                        </a>
-                        <ul class="dropdown-menu">
-                            <li class="dropdown-item"><a class="nav-link" href="@Url.Action("Login", "Account")">Login</a></li>
-                            <li class="dropdown-item"><a class="nav-link" href="@Url.Action("Signup", "Account")">Register</a></li>
-
-                        </ul>
-
+                        <li class="nav-item active">
+                            <a class="nav nav-link nav-tabs" href="@Url.Action("Panel", "Admin")">
+                                Admin Panel
+                                <span class=" ui-icon ui-icon-mail-closed"></span>
+                                <span id="msgbadge" class="badge"></span>
+                            </a>
+                        </li>
                     }
-                </div>
+
+
+                    <div class="dropdown nav-item mynavitem">
+                        @if (User.Identity.IsAuthenticated)
+
+                        {
+
+                            <a data-toggle="dropdown" class="dropdown-toggle nav-link">
+                                @name
+
+                            </a>
+                            <ul class="dropdown-menu">
+                                <li><a class="nav-link" href="@Url.Action("Logout", "Account")">Logout</a></li>
+                                <li><a class="nav-link" href="@Url.Action("#", "Account")"></a></li>
+
+                            </ul>
+
+                        }
+                        else
+                        {
+
+                            <a data-toggle="dropdown" class="dropdown-toggle nav-link">
+                                Hello! User
+
+                            </a>
+                            <ul class="dropdown-menu">
+                                <li class="dropdown-item"><a class="nav-link" href="@Url.Action("Login", "Account")">Login</a></li>
+                                <li class="dropdown-item"><a class="nav-link" href="@Url.Action("Signup", "Account")">Register</a></li>
+
+                            </ul>
+
+                        }
+                    </div>
                 </ul>
-            
-               <form class="d-inline my-2 ms-1" asp-action= "Search" asp-controller="Quiz" >
-                        <input id="Search" class="form-control" type="search" placeholder="Search" aria-label="Search">
-                    <button class="btn btn-outline-success nav-link col-2 offset-4 my-lg-2 my-sm-0" type="submit">Search</button>
-                    </form>
 
-                
+                <div class="d-inline my-2 ms-1">
+                    <input id="Search" class="form-control" type="search" placeholder="Search" aria-label="Search">
+                    <button class="btn btn-outline-success nav-link col-2 offset-4 my-lg-2 my-sm-0" value="Search" onclick="searchasync()" data-bs-toggle="modal" data-bs-target="#searchdiv">Search</button>
+                </div>
 
-          
 
+
+
+
+            </div>
+        </nav>
+    </div>
+    <div class="modal" id="searchdiv" tabindex="-1">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Search Result:</h5>
+                    @*<button type="button" class="btn-close" data-dismiss="modal" data-toggle="modal" aria-label="Close"></button>*@
+                </div>
+                <div class="modal-body" id="searchmodalbody">
+                    <table>
+                        <tr>
+                            <td id="resultid"></td>
+                            <td id="resultqstn"></td>
+                            <td id="resultAnswer"></td>
+                        </tr>
+                    </table>
+                </div>
+                <div class="modal-footer">
+                    @*<button type="button" class="btn btn-secondary" data-dismiss="modal" data-toggle="modal">Close</button>*@
+                </div>
+            </div>
         </div>
-    </nav>
     </div>
     <script type="text/javascript">
-        
-        $(function() {
-                
-                var xhr = $.ajax({
-                    
-             url: '@Url.Action("Count","Admin")',
-            type: "GET",
-            dataType: "json" // Add this to specify the expected data type
-        });
 
-                xhr.done(function(messages) {
-                    
-                    var resp = messages.quizMessages;
-                    // Assuming the response is an object with a "ResponseDescription" property
+        $(function () {
+            
+            var xhr = $.ajax({
 
-                    console.log(messages.responseDescription);
-            $('#msgbadge').html(resp);
-                });
-
-                xhr.fail(function(error) {
-                    console.log(error);
-                });
+                url: '@Url.Action("Count","Admin")',
+                type: "Get",
+                dataType: "json" // Add this to specify the expected data type
             });
 
-            
+            xhr.done(function (messages) {
+
+                var resp = messages.quizMessages;
+                // Assuming the response is an object with a "ResponseDescription" property
+
+                console.log(messages.responseDescription);
+                $('#msgbadge').html(resp);
+            });
+
+            xhr.fail(function (error) {
+                console.log(error);
+            });
+        });
+
+        function searchasync() {
+            debugger
+                var searchquery = $('#Search').val();
+                      debugger;
+                      var xhr = $.ajax({
+                          url: '@Url.Action("search","quiz")',
+                          type: "Post",
+                          data: { query: searchquery }
+                      });
                
+                xhr.done(function(qstn){
+                    if(qstn.responsecode == 200)
+                    {
+                    var questions = qstn.questions;
+
+                    for (var i = 0; i < questions.length; i++)
+                    {
+                        var a = questions[i];
+                    
+                     $('#resultid').html(a.QID);
+                     $('#resultqstn').html(a.Question);
+                     $('#resultAnswer').html(a.Answer);
+
+                     
+                    }
+                    
+                     $('#searchmodalbody').html(qstn.responseDescription);
+                    
+                });
+                
+           
+        };
         
+
+
+
+
+
+
+
     </script>
 
 </header>
