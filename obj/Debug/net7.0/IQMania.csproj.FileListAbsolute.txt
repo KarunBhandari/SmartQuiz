@@ -1173,3 +1173,13 @@ C:\Users\karun.bhandari\Desktop\projects\SmartQuiz\bin\Debug\net7.0\Serilog.Sett
 C:\Users\karun.bhandari\Desktop\projects\SmartQuiz\bin\Debug\net7.0\Serilog.Sinks.Console.dll
 C:\Users\karun.bhandari\Desktop\projects\SmartQuiz\bin\Debug\net7.0\Serilog.Sinks.Debug.dll
 C:\Users\karun.bhandari\Desktop\projects\SmartQuiz\bin\Debug\net7.0\Serilog.Sinks.File.dll
+X:\DOTNET\SmartQuiz\IQMania\bin\Debug\net7.0\Microsoft.Extensions.DependencyModel.dll
+X:\DOTNET\SmartQuiz\IQMania\bin\Debug\net7.0\Serilog.dll
+X:\DOTNET\SmartQuiz\IQMania\bin\Debug\net7.0\Serilog.AspNetCore.dll
+X:\DOTNET\SmartQuiz\IQMania\bin\Debug\net7.0\Serilog.Extensions.Hosting.dll
+X:\DOTNET\SmartQuiz\IQMania\bin\Debug\net7.0\Serilog.Extensions.Logging.dll
+X:\DOTNET\SmartQuiz\IQMania\bin\Debug\net7.0\Serilog.Formatting.Compact.dll
+X:\DOTNET\SmartQuiz\IQMania\bin\Debug\net7.0\Serilog.Settings.Configuration.dll
+X:\DOTNET\SmartQuiz\IQMania\bin\Debug\net7.0\Serilog.Sinks.Console.dll
+X:\DOTNET\SmartQuiz\IQMania\bin\Debug\net7.0\Serilog.Sinks.Debug.dll
+X:\DOTNET\SmartQuiz\IQMania\bin\Debug\net7.0\Serilog.Sinks.File.dll

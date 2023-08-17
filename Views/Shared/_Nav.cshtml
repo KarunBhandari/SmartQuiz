@@ -23,48 +23,48 @@
 
 <header>
     <div class="row">
-        <nav class="navbar">
+        <nav class="navbar navbarnavbar-expand-lg navbar-expand-md nav-pills mynavbar">
 
 
-            <img class=" img-fluid d-none d-sm-block" href="@Url.Action("Index", "Quiz")" src="~/Photos/Icon/logocircle.png" style="width:100px; height:100px; margin-top:0; margin-bottom:0" />
+            <img class=" img-fluid d-none d-sm-block" href="@Url.Action("Index", "Quiz")" src="~/Photos/Icon/Silver Icon.jpg" margin-top:0; margin-bottom:0" />
 
             <button class=" navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
             </button>
 
             <div class="collapse navbar-collapse navbar-expand-md navbar-expand-md mynavbar" id="navbarSupportedContent">
-                <ul class="navbar-nav mr-auto" style="">
-                    <li class="nav-item active">
-                        <a class="nav nav-link nav-tabs" href="@Url.Action("Index", "Quiz")">Home</a>
-                    </li>
+                <div class=" list-group-horizontal nav navbar-nav mr-auto nav-pills">
+                    <div class=" list-group-item nav-item ">
+                        <a class=" list-group-item-action nav-link nav-tabs" href="@Url.Action("Index", "Quiz")">Home</a>
+                    </div>
 
-                    <li class="nav-item dropdown active">
-                        <a class="nav nav-link nav-tabs" href="@Url.Action("DisplayQuestions", "Quiz")">Category Wise Questions</a>
-                    </li>
+                    <div class="list-group-item nav-item dropdown ">
+                        <a class=" nav-link nav-tabs" href="@Url.Action("DisplayQuestions", "Quiz")">Category Wise Questions</a>
+                    </div>
 
-                    <li class="nav-item active">
+                    <div class="list-group-item nav-item ">
                         <a class="nav nav-link nav-tabs" href="@Url.Action("PlayQuiz", "Quiz")">Play Quiz</a>
-                    </li>
+                    </div>
                     @if (User.Identity.IsAuthenticated)
 
                     {
-                        <li class="nav-item active">
-                            <a class="nav nav-link nav-tabs" href="@Url.Action("AddQuiz", "Quiz")">Add Quiz</a>
-                        </li>
+                        <div class="list-group-item nav-item ">
+                            <a class=" nav-link nav-tabs" href="@Url.Action("AddQuiz", "Quiz")">Add Quiz</a>
+                        </div>
                     }
                     @if (userInfo != null && userInfo.Role?.Contains("AdminUser") == true)
                     {
-                        <li class="nav-item active">
-                            <a class="nav nav-link nav-tabs" href="@Url.Action("Panel", "Admin")">
+                        <div class="list-group-item nav-item ">
+                            <a class=" nav-link nav-tabs" href="@Url.Action("Panel", "Admin")">
                                 Admin Panel
                                 <span class=" ui-icon ui-icon-mail-closed"></span>
                                 <span id="msgbadge" class="badge"></span>
                             </a>
-                        </li>
+                        </div>
                     }
 
 
-                    <div class="dropdown nav-item mynavitem">
+                    <div class="list-group-item dropdown nav-item mynavitem">
                         @if (User.Identity.IsAuthenticated)
 
                         {
@@ -95,7 +95,7 @@
 
                         }
                     </div>
-                </ul>
+                </div>
 
                 <div class="d-inline my-2 ms-1">
                     <input id="Search" class="form-control" type="search" placeholder="Search" aria-label="Search">
