@@ -2,73 +2,89 @@
     For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 *@
 @{
-    
+
 }
 <div class="container">
 
 
     <div class="row">
-        <div class="col-md-3 col-xs-12">
-            <div class="accordion" id="accordionExample">
-    <div class="card">
-        <div class="card-header" id="headingOne">
-            <h2 class="mb-0">
-                <button class="btn btn-link btn-block text-left" type="button" data-toggle="collapse" data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
-                    Recent Exam Centre Notice 
-                </button>
-            </h2>
+        <img class="col-12 img-thumbnail" src="~/photos/iqmania.jpg" />
+        <div class="d-inline my-2 ms-1">
+            <input id="Search" class="col-11 h-50" type="search" placeholder="Search" aria-label="Search" aria-describedby=" inputGroup-sizing-lg">
+            <button class="  btn-outline-success nav-link col-3 offset-4 my-lg-2 my-sm-0" value="Search" id="searchbtn">
+                <h5 class="text-bg-primary">Find your questions</h5>
+            </button>
         </div>
-
-        <div id="collapseOne" class="collapse show" aria-labelledby="headingOne" data-parent="#accordionExample">
-            <div class="card-body">
-                Some placeholder content for the first accordion panel. This panel is shown by default, thanks to the <code>.show</code> class.
+        <div class="modal" id="searchdiv" tabindex="-1">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title">Search Result:</h5>
+                        <button type="button" class="btn-close" data-target="#searchdiv" data-toggle="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body" id="searchmodalbody">
+                        <table>
+                            <tr>
+                                
+                                <td id="SearchDescription"></td>
+                            </tr>
+                        </table>
+                    </div>
+                    <div class="modal-footer">
+                        @*<button type="button" class="btn btn-secondary" data-target="searchdiv" data-toggle="modal">Close</button>*@
+                    </div>
+                </div>
             </div>
         </div>
-    </div>
-    <div class="card">
-        <div class="card-header" id="headingTwo">
-            <h2 class="mb-0">
-                <button class="btn btn-link btn-block text-left collapsed" type="button" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
-                    Recent Examination Results
-                </button>
-            </h2>
-        </div>
-        <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionExample">
-            <div class="card-body">
-                Some placeholder content for the second accordion panel. This panel is hidden by default.
-            </div>
-        </div>
-    </div>
-    <div class="card">
-        <div class="card-header" id="headingThree">
-            <h2 class="mb-0">
-                <button class="btn btn-link btn-block text-left collapsed" type="button" data-toggle="collapse" data-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
-                    Recent Vacancy Notice
-                </button>
-            </h2>
-        </div>
-        <div id="collapseThree" class="collapse" aria-labelledby="headingThree" data-parent="#accordionExample">
-            <div class="card-body">
-                And lastly, the placeholder content for the third and final accordion panel. This panel is hidden by default.
-            </div>
-        </div>
-    </div>
-</div>
-
-        </div>
-       
+        <br />
+        <br />
+        <br />
+        
         <div class="col-md-3 col-sm-12">
             <table class="table-bordered" style="border: thick 2px">
                 <tr>
-                <th class="text-info" style="font-family: Arial; font-size: 16px">
-                    Crack the Irongate with us.
-                </th>
+                    <th class="text-info" style="font-family: Arial; font-size: 16px">
+                        Crack the Irongate with us.
+                    </th>
                 </tr>
                 <tbody>
-                    
+
+                    <tr>
+                        <td><span class="ui-icon ui-icon-person"></span>Public Service Commission</td>
+
+                    </tr>
+                    <tr>
+                        <td><span class="ui-icon ui-icon-person"></span> Bank Employement Preparation</td>
+                    </tr>
+                    <tr>
+                        <td><span class="ui-icon ui-icon-person"></span> Teachers Service Commission</td>
+                    </tr>
+                    <tr>
+                        <td><span class="ui-icon ui-icon-person"></span> Nepal Army</td>
+                    </tr>
+                    <tr>
+                        <td><span class="ui-icon ui-icon-person"></span> Nepal Police</td>
+                    </tr>
+                    <tr>
+                        <td><span class="ui-icon ui-icon-person"></span> Forester Preparation</td>
+                    </tr>
+                    <tr><td><span class="ui-icon ui-icon-person"></span>And Many more.....</td></tr>
+
+                </tbody>
+            </table>
+        </div>
+        <div class="col-md-3 col-sm-12">
+            <table class="table-bordered" style="border: thick 2px">
+                <tr>
+                    <th class="text-info" style="font-family: Arial; font-size: 16px">
+                        Recent Vacancy Notice
+                    </th>
+                </tr>
+                <tbody>
+
                     <tr>
                         <td><span class="ui-icon ui-icon-bullet"></span>Public Service Commission</td>
-                        
+
                     </tr>
                     <tr>
                         <td><span class="ui-icon ui-icon-bullet"></span> Bank Employement Preparation</td>
@@ -86,9 +102,111 @@
                         <td><span class="ui-icon ui-icon-bullet"></span> Forester Preparation</td>
                     </tr>
                     <tr><td><span class="ui-icon ui-icon-bullet"></span>And Many more.....</td></tr>
-                    
+
                 </tbody>
             </table>
-       </div>
+        </div>
+        <div class="col-md-3 col-sm-12">
+            <table class="table-bordered" style="border: thick 2px">
+                <tr>
+                    <th class="text-info" style="font-family: Arial; font-size: 16px">
+                        Crack the Irongate with us.
+                    </th>
+                </tr>
+                <tbody>
+
+                    <tr>
+                        <td><span class="ui-icon ui-icon-bullet"></span>Public Service Commission</td>
+
+                    </tr>
+                    <tr>
+                        <td><span class="ui-icon ui-icon-bullet"></span> Bank Employement Preparation</td>
+                    </tr>
+                    <tr>
+                        <td><span class="ui-icon ui-icon-bullet"></span> Teachers Service Commission</td>
+                    </tr>
+                    <tr>
+                        <td><span class="ui-icon ui-icon-bullet"></span> Nepal Army</td>
+                    </tr>
+                    <tr>
+                        <td><span class="ui-icon ui-icon-bullet"></span> Nepal Police</td>
+                    </tr>
+                    <tr>
+                        <td><span class="ui-icon ui-icon-bullet"></span> Forester Preparation</td>
+                    </tr>
+                    <tr><td><span class="ui-icon ui-icon-bullet"></span>And Many more.....</td></tr>
+
+                </tbody>
+            </table>
+        </div>
+        <div class="col-md-3 col-sm-12">
+            <table class="table-bordered" style="border: thick 2px">
+                <tr>
+                    <th class="text-info" style="font-family: Arial; font-size: 16px">
+                        Crack the Irongate with us.
+                    </th>
+                </tr>
+                <tbody>
+
+                    <tr>
+                        <td><span class="ui-icon ui-icon-bullet"></span>Public Service Commission</td>
+
+                    </tr>
+                    <tr>
+                        <td><span class="ui-icon ui-icon-bullet"></span> Bank Employement Preparation</td>
+                    </tr>
+                    <tr>
+                        <td><span class="ui-icon ui-icon-bullet"></span> Teachers Service Commission</td>
+                    </tr>
+                    <tr>
+                        <td><span class="ui-icon ui-icon-bullet"></span> Nepal Army</td>
+                    </tr>
+                    <tr>
+                        <td><span class="ui-icon ui-icon-bullet"></span> Nepal Police</td>
+                    </tr>
+                    <tr>
+                        <td><span class="ui-icon ui-icon-bullet"></span> Forester Preparation</td>
+                    </tr>
+                    <tr><td><span class="ui-icon ui-icon-bullet"></span>And Many more.....</td></tr>
+
+                </tbody>
+            </table>
+        </div>
+
     </div>
 </div>
+
+@section Scripts{
+    <script type="text/javascript">
+        $(function () {
+        $('#searchbtn').click(function() {
+            var searchquery = $("#Search").val();
+           
+            var xhr = $.ajax({
+                url: '@Url.Action("search","quiz")',
+                type: "Post",
+                data: { query: searchquery }
+            });
+
+            xhr.done(function (qstn) {
+                    debugger;
+
+                if (qstn.responseCode == 200) {
+                    var questions = qstn.questionList;
+                        $('#searchmodalbody').html(qstn.responseDescription + '<hr />');
+                    for (var i = 0; i < questions.length; i++) {
+                        var a = questions[i];
+                            $('#searchmodalbody table').append('<tr>'+'<td>'+a.qid+'</td>'+'<td>'+a.question+'</td>'+'<td>'+a.answer+'</td>');
+                    }
+                        
+                }
+                if(qstn.responseCode !=200)
+                {
+                    $('#searchmodalbody').html(qstn.responseDescription);
+                }
+                });
+                $('#searchdiv').show();
+        });
+        });
+    </script>
+                    }

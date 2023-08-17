@@ -105,19 +105,21 @@ Begin
 				  WHERE LOWER(Questions) LIKE LOWER('%' + @inputtext + '%')
 				  OR LOWER(Answer) LIKE LOWER('%' + @inputtext + '%'))
 			Begin
+				
+				Set @responsecode= 200; Set @responsedescription = 'Search Completed';
+				Select @responsecode as ResponseCode, @responsedescription as ResponseDescription;
 				SELECT *
 				FROM tblQuestions (nolock)
 				WHERE LOWER(Questions) LIKE LOWER('%' + @inputtext + '%')
 				   OR LOWER(Answer) LIKE LOWER('%' + @inputtext + '%');
-				Set @responsecode= 200; Set @responsedescription = 'Search Completed'
 			End
 		Else
 		 Begin
-			Set @responsecode= 404; Set @responsedescription = 'Search Text Not Found'
+			Set @responsecode= 404; Set @responsedescription = 'Search Text Not Found';
+			Select @responsecode as ResponseCode, @responsedescription as ResponseDescription
 		 End
 	End
-	Select @responsecode as ResponseCode, @responsedescription as ResponseDescription
 End
 
-
-Exec spSearchquestiontext 'Nepal', 'Search'
+Use IQ_Mania
+Exec spSearchquestiontext 'Jung', 'Search'

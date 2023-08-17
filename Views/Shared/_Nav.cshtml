@@ -23,7 +23,7 @@
 
 <header>
     <div class="row">
-        <nav class="navbar navbarnavbar-expand-lg navbar-expand-md nav-pills mynavbar">
+        <nav class="navbar navbar-expand-lg navbar-expand-md  mynavbar">
 
 
             <img class=" img-fluid d-none d-sm-block" href="@Url.Action("Index", "Quiz")" src="~/Photos/Icon/Silver Icon.jpg" margin-top:0; margin-bottom:0" />
@@ -32,44 +32,46 @@
                 <span class="navbar-toggler-icon"></span>
             </button>
 
-            <div class="collapse navbar-collapse navbar-expand-md navbar-expand-md mynavbar" id="navbarSupportedContent">
-                <div class=" list-group-horizontal nav navbar-nav mr-auto nav-pills">
-                    <div class=" list-group-item nav-item ">
-                        <a class=" list-group-item-action nav-link nav-tabs" href="@Url.Action("Index", "Quiz")">Home</a>
-                    </div>
+            <div class="collapse navbar-collapse navbar-expand-md navbar-expand-md" id="navbarSupportedContent">
+                <ul class=" nav navbar-nav mr-auto">
+                    <li>
+                        <a class="nav-item nav-link nav-tabs" href="@Url.Action("Index", "Quiz")">Home</a>
+                    </li>
+                    
+                    <li>
+                        <a class=" nav-item  nav-link nav-tabs" href="@Url.Action("DisplayQuestions", "Quiz")">Category Wise Questions</a>
+                    </li>
 
-                    <div class="list-group-item nav-item dropdown ">
-                        <a class=" nav-link nav-tabs" href="@Url.Action("DisplayQuestions", "Quiz")">Category Wise Questions</a>
-                    </div>
-
-                    <div class="list-group-item nav-item ">
-                        <a class="nav nav-link nav-tabs" href="@Url.Action("PlayQuiz", "Quiz")">Play Quiz</a>
-                    </div>
+                    <li>
+                        <a class=" nav-item nav nav-link nav-tabs" href="@Url.Action("PlayQuiz", "Quiz")">Play Quiz</a>
+                    </li>
+                   
+                    <li>
                     @if (User.Identity.IsAuthenticated)
 
                     {
-                        <div class="list-group-item nav-item ">
-                            <a class=" nav-link nav-tabs" href="@Url.Action("AddQuiz", "Quiz")">Add Quiz</a>
-                        </div>
-                    }
+                        
+                            <a class=" nav-item nav-link nav-tabs" href="@Url.Action("AddQuiz", "Quiz")">Add Quiz</a>
+
+                                }
+                    </li>
+                    <li>
                     @if (userInfo != null && userInfo.Role?.Contains("AdminUser") == true)
                     {
-                        <div class="list-group-item nav-item ">
-                            <a class=" nav-link nav-tabs" href="@Url.Action("Panel", "Admin")">
+                            <a class=" nav-item nav-link nav-tabs" href="@Url.Action("Panel", "Admin")">
                                 Admin Panel
                                 <span class=" ui-icon ui-icon-mail-closed"></span>
                                 <span id="msgbadge" class="badge"></span>
                             </a>
-                        </div>
                     }
+                    </li>
 
-
-                    <div class="list-group-item dropdown nav-item mynavitem">
+                    <li>
                         @if (User.Identity.IsAuthenticated)
 
                         {
 
-                            <a data-toggle="dropdown" class="dropdown-toggle nav-link">
+                            <a data-toggle="dropdown" class=" dropdown nav-item mynavitem dropdown-toggle nav-link">
                                 @name
 
                             </a>
@@ -83,24 +85,21 @@
                         else
                         {
 
-                            <a data-toggle="dropdown" class="dropdown-toggle nav-link">
+                        <a data-toggle="dropdown" class="list-group-item dropdown nav-item mynavitem dropdown-toggle nav-link">
                                 Hello! User
 
                             </a>
-                            <ul class="dropdown-menu">
+                        <ul class="dropdown-menu">
                                 <li class="dropdown-item"><a class="nav-link" href="@Url.Action("Login", "Account")">Login</a></li>
                                 <li class="dropdown-item"><a class="nav-link" href="@Url.Action("Signup", "Account")">Register</a></li>
 
                             </ul>
 
                         }
-                    </div>
-                </div>
+                    </li>
+                </ul>
 
-                <div class="d-inline my-2 ms-1">
-                    <input id="Search" class="form-control" type="search" placeholder="Search" aria-label="Search">
-                    <button class="btn btn-outline-success nav-link col-2 offset-4 my-lg-2 my-sm-0" value="Search" onclick="searchasync()" data-bs-toggle="modal" data-bs-target="#searchdiv">Search</button>
-                </div>
+                
 
 
 
@@ -109,32 +108,11 @@
             </div>
         </nav>
     </div>
-    <div class="modal" id="searchdiv" tabindex="-1">
-        <div class="modal-dialog">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title">Search Result:</h5>
-                    @*<button type="button" class="btn-close" data-dismiss="modal" data-toggle="modal" aria-label="Close"></button>*@
-                </div>
-                <div class="modal-body" id="searchmodalbody">
-                    <table>
-                        <tr>
-                            <td id="resultid"></td>
-                            <td id="resultqstn"></td>
-                            <td id="resultAnswer"></td>
-                        </tr>
-                    </table>
-                </div>
-                <div class="modal-footer">
-                    @*<button type="button" class="btn btn-secondary" data-dismiss="modal" data-toggle="modal">Close</button>*@
-                </div>
-            </div>
-        </div>
-    </div>
+    
     <script type="text/javascript">
 
-        $(function () {
-            
+
+            $(function(){
             var xhr = $.ajax({
 
                 url: '@Url.Action("Count","Admin")',
@@ -156,38 +134,7 @@
             });
         });
 
-        function searchasync() {
-            debugger
-                var searchquery = $('#Search').val();
-                      debugger;
-                      var xhr = $.ajax({
-                          url: '@Url.Action("search","quiz")',
-                          type: "Post",
-                          data: { query: searchquery }
-                      });
-               
-                xhr.done(function(qstn){
-                    if(qstn.responsecode == 200)
-                    {
-                    var questions = qstn.questions;
-
-                    for (var i = 0; i < questions.length; i++)
-                    {
-                        var a = questions[i];
-                    
-                     $('#resultid').html(a.QID);
-                     $('#resultqstn').html(a.Question);
-                     $('#resultAnswer').html(a.Answer);
-
-                     
-                    }
-                    
-                     $('#searchmodalbody').html(qstn.responseDescription);
-                    
-                });
-                
-           
-        };
+        
         
 
 

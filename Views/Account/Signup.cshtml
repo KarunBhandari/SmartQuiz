@@ -30,13 +30,19 @@
                 <br />
              <div class="form-group">
                  <label for="Password">Password</label>
+             <div class="input-group mb-3">
                     <input type="password" class="form-control border-dark" asp-for="Password" placeholder="Enter Password" />
-                 <span asp-validation-for="Password" class="text-danger"></span>
+                        <span class="input-group-text"><img src="~/photos/icon/seeicon.png" /></span>
+                </div>
+                    <span asp-validation-for="Password" class="text-danger"></span>
              </div>
                 <br />
              <div class="form-group">
                  <label for="ConfirmPassword">Confirm Password</label>
-                    <input type="password" class="form-control border-dark" asp-for="ConfirmPassword" placeholder="Enter Password Again" />
+                    <div class="input-group mb-3">
+                        <input type="password" class="form-control border-dark" asp-for="ConfirmPassword" placeholder="Enter Password" />
+                        <span class="input-group-text"><img src="~/photos/icon/seeicon.png" /></span>
+                    </div>
                  <span asp-validation-for="ConfirmPassword" class="text-danger"></span>
              </div>
                 <br />

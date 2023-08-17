@@ -102,8 +102,7 @@ namespace IQMania.Controllers
                 return Json(qstn);
             }
              qstn = await _quizRepository.SearchQuestionsAsync(query);
-           if(qstn.ResponseCode != 200)
-            {ViewBag.Message= qstn.ResponseDescription.ToString(); }
+           
 
             return Json(qstn);
         }

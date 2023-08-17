@@ -15,10 +15,10 @@ namespace IQMania.Repository
 {
     public class QuizServices : IQuizServices
     {
-       readonly Dao connection1;
+        readonly Dao connection1;
         private readonly IHttpContextAccessor _contextAccessor;
         private string Constr { get; set; }
-        
+
         public IConfiguration configuration;
 
         public QuizServices(IConfiguration _configuration, IHttpContextAccessor accessor)
@@ -28,7 +28,7 @@ namespace IQMania.Repository
             Constr = configuration.GetConnectionString("DefaultConnection");
             connection1 = new Dao();
         }
-       
+
         public List<QuestionOptions> GetQuestions()
         {
             List<QuestionOptions> questionOptions = new();
@@ -42,7 +42,7 @@ namespace IQMania.Repository
                     CommandType = CommandType.StoredProcedure
                 };
                 cmd.Parameters.AddWithValue("@flag", "Qstbycat");
-                
+
                 con.Open();
                 SqlDataReader rdr = cmd.ExecuteReader();
                 while (rdr.Read())
@@ -75,8 +75,8 @@ namespace IQMania.Repository
                 {
                     CommandType = CommandType.StoredProcedure
                 };
-                cmd.Parameters.AddWithValue("@flag","GetMCQs");
-                cmd.Parameters.AddWithValue("@Category",dropdownValue);
+                cmd.Parameters.AddWithValue("@flag", "GetMCQs");
+                cmd.Parameters.AddWithValue("@Category", dropdownValue);
                 con.Open();
                 SqlDataReader rdr = cmd.ExecuteReader();
                 while (rdr.Read())
@@ -99,12 +99,12 @@ namespace IQMania.Repository
             try
             {
                 using (SqlConnection con = new(Constr))
-            {
-                SqlCommand command = new("spAddMCQ", con)
                 {
-                    CommandType = CommandType.StoredProcedure
-                };
-                command.Parameters.AddWithValue("@flag", "AddminUser");
+                    SqlCommand command = new("spAddMCQ", con)
+                    {
+                        CommandType = CommandType.StoredProcedure
+                    };
+                    command.Parameters.AddWithValue("@flag", "AddminUser");
                     command.Parameters.AddWithValue("@Question", addQuiz.QuizQuestion);
                     command.Parameters.AddWithValue("@Answer", addQuiz.QuizAnswer);
                     command.Parameters.AddWithValue("@Category", addQuiz.Category);
@@ -131,41 +131,42 @@ namespace IQMania.Repository
             return response;
         }
 
-        
 
-        public QuestionOptions TestResult(QuizRequestModel quizRequestModel,HttpContext httpContext)
+
+        public QuestionOptions TestResult(QuizRequestModel quizRequestModel, HttpContext httpContext)
         {
             QuestionOptions result = new();
-            try {
-                    using (SqlConnection con = new(Constr))
+            try
+            {
+                using (SqlConnection con = new(Constr))
+                {
+                    string?
+                    claimUserID = httpContext.User.FindFirst("UserId")?.Value.ToString();
+                    int UserID = 0;
+                    if (int.TryParse(claimUserID, out int parsedUserID))
                     {
-                        string?
-                        claimUserID = httpContext.User.FindFirst("UserId")?.Value.ToString();
-                        int UserID = 0;
-                         if(int.TryParse(claimUserID, out int parsedUserID))
-                        { 
                         UserID = parsedUserID;
 
-                         SqlCommand cmd = new("spMainTestResult", con)
-                    {
-                        CommandType = CommandType.StoredProcedure
-                    };
+                        SqlCommand cmd = new("spMainTestResult", con)
+                        {
+                            CommandType = CommandType.StoredProcedure
+                        };
                         var usertoken = _contextAccessor.HttpContext.Session.GetInt32("UserToken");
-                         cmd.Parameters.AddWithValue("@QuestionId", quizRequestModel.QuestionNo);
-                         cmd.Parameters.AddWithValue("@Selectedanswer", quizRequestModel.Answer);
-                         cmd.Parameters.AddWithValue("@UID", UserID);
+                        cmd.Parameters.AddWithValue("@QuestionId", quizRequestModel.QuestionNo);
+                        cmd.Parameters.AddWithValue("@Selectedanswer", quizRequestModel.Answer);
+                        cmd.Parameters.AddWithValue("@UID", UserID);
                         cmd.Parameters.AddWithValue("@Usertoken", usertoken);
 
-                         con.Open();
-                         int status = cmd.ExecuteNonQuery();
+                        con.Open();
+                        int status = cmd.ExecuteNonQuery();
 
-             
-                         result.ResponseCode = 200;
-                         result.ResponseDescription = "OK";
-                         return result;
-                         }
-                    }      
-              }
+
+                        result.ResponseCode = 200;
+                        result.ResponseDescription = "OK";
+                        return result;
+                    }
+                }
+            }
             catch (Exception ex)
             {
                 result.ResponseCode = 500;
@@ -179,42 +180,47 @@ namespace IQMania.Repository
             Questions qstn = new();
             SearchResult questions = new();
             string sql = "Exec spSearchquestiontext @flag = 'Search'";
-            sql += ", @@inputtext = " + query.ToString();
+            sql += ", @inputtext = " + connection1.FilterString(query);
             try
             {
                 var response = await Task.Run(() => connection1.ExecuteDataset(sql));
-                if(response != null)
+                if (response != null)
                 {
-                    var dbres = response.Tables[1];
+                    var dbres = response.Tables[0];
                     questions.ResponseCode = Convert.ToInt32(dbres.Rows[0]["ResponseCode"]);
-                    questions.ResponseDescription = (dbres.Rows[1]["ResponseDescription"]).ToString();
+                    questions.ResponseDescription = (dbres.Rows[0]["ResponseDescription"]).ToString();
 
-                    if(questions.ResponseCode == 200)
+                    if (questions.ResponseCode == 200)
                     {
-                        var dbres1 = response.Tables[0];
+                        var dbres1 = response.Tables[1];
                         int i = 0;
-                        foreach(DataRow row in dbres1.Rows) {
-                            i= i++;
-                            questions.Questions.Add(new Questions()
-                            {
-                                QID = i,
-                                Question = (row["Questions"]).ToString(),
-                                Answer = (row["Questions"]).ToString(),
-                                
-                            });
 
+                        var listData = new List<Questions>();
+                        foreach (DataRow row in dbres1.Rows)
+                        {
+                            
+
+                            listData.Add(new Questions
+                            {
+                                QID = i+1,
+                                Question = (row["Questions"]).ToString(),
+                                Answer = (row["Answer"]).ToString()
+                            });
+                            i++;
                         }
-                        
+                        questions.QuestionList = listData;
+
                     }
-                    
+
                 }
-                
+
             }
-            catch(Exception ex) {
-                  questions.ResponseDescription = ex.Message; 
-            
+            catch (Exception ex)
+            {
+                questions.ResponseDescription = ex.Message;
+
             }
-            
+
             return questions;
         }
     }
