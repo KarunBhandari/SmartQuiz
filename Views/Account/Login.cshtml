@@ -26,8 +26,10 @@
                 <br />
                 <div class="form-group">
                     <label for="Password">Password</label>
-                   <input type="password" class="form-control border-dark" asp-for="Password" placeholder="Enter Password" />
-                   <i class=" bi bi"></i>
+                    <div class="input-group mb-3">
+                        <input type="password" class="form-control border-dark" asp-for="Password" placeholder="Enter Password" />
+                        <span class="input-group-text border-dark"><img src="~/photos/icon/seeicon.png" id="showpassword" /></span>
+                    </div>
                     <span asp-validation-for="Password" class="text-danger"></span>
                     <span><a href ="@Url.Action("ForgotPassword","Account")" class="text-info">@ViewBag.Pass</a></span>
                 </div>
@@ -41,9 +43,17 @@
     </div>
 </div>
 
-                    @section Scripts{
-                        <script type="text/javascript">
-                            
+@section Scripts{
+ <script type="text/javascript">
+     $(function(){
+                        var currentpwfiled = $('#Password');
+                        var currentpw = currentpwfiled.val();
+                        $('#showpassword').mousedown(function(){
+                            currentpwfiled.attr('type', 'text');
+                        }).mouseup(function () {
+                            currentpwfiled.attr('type', 'password');
+                                        });
+                });
                         </script>
                         
                     }

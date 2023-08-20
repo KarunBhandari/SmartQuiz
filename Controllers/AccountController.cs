@@ -110,7 +110,7 @@ namespace IQMania.Controllers
             TempData["ReturnUrl"] = ReturnUrl;
             return View();
         }
-
+        [Authorize]
         public IActionResult Logout()
         {
             HttpContext.Session.Remove(SessionKeyName);
@@ -132,6 +132,7 @@ namespace IQMania.Controllers
         }
 
         [HttpPost]
+        
         public IActionResult ForgotPassword(Signup signup)
         {
             if(ModelState.IsValid)

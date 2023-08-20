@@ -189,20 +189,23 @@
             });
 
             xhr.done(function (qstn) {
-                    debugger;
-
+                    
+                    $('#searchmodalbody table').empty();
                 if (qstn.responseCode == 200) {
                     var questions = qstn.questionList;
-                        $('#searchmodalbody').html(qstn.responseDescription + '<hr />');
+                        $('#SearchDescription').html(qstn.responseDescription + '<hr />');
                     for (var i = 0; i < questions.length; i++) {
                         var a = questions[i];
                             $('#searchmodalbody table').append('<tr>'+'<td>'+a.qid+'</td>'+'<td>'+a.question+'</td>'+'<td>'+a.answer+'</td>');
                     }
                         
+                        
                 }
                 if(qstn.responseCode !=200)
                 {
-                    $('#searchmodalbody').html(qstn.responseDescription);
+                        $('#searchmodalbody table').empty();
+                        $('#SearchDescription').html(qstn.responseDescription);
+                        
                 }
                 });
                 $('#searchdiv').show();

@@ -22,9 +22,9 @@
 
 
 <header>
-    <div class="row">
-        <nav class="navbar navbar-expand-lg navbar-expand-md  mynavbar">
-
+    
+        <nav class="navbar navbar-expand-lg mynavbar">
+            
 
             <img class=" img-fluid d-none d-sm-block" href="@Url.Action("Index", "Quiz")" src="~/Photos/Icon/Silver Icon.jpg" margin-top:0; margin-bottom:0" />
 
@@ -32,33 +32,33 @@
                 <span class="navbar-toggler-icon"></span>
             </button>
 
-            <div class="collapse navbar-collapse navbar-expand-md navbar-expand-md" id="navbarSupportedContent">
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
                 <ul class=" nav navbar-nav mr-auto">
-                    <li>
-                        <a class="nav-item nav-link nav-tabs" href="@Url.Action("Index", "Quiz")">Home</a>
+                <li class="nav-item">
+                        <a class="nav-link nav-tabs" href="@Url.Action("Index", "Quiz")">Home</a>
                     </li>
-                    
-                    <li>
+
+                <li class="nav-item">
                         <a class=" nav-item  nav-link nav-tabs" href="@Url.Action("DisplayQuestions", "Quiz")">Category Wise Questions</a>
                     </li>
 
-                    <li>
-                        <a class=" nav-item nav nav-link nav-tabs" href="@Url.Action("PlayQuiz", "Quiz")">Play Quiz</a>
+                <li class="nav-item">
+                        <a class="nav nav-link nav-tabs" href="@Url.Action("PlayQuiz", "Quiz")">Play Quiz</a>
                     </li>
-                   
-                    <li>
+
+                <li class="nav-item">
                     @if (User.Identity.IsAuthenticated)
 
                     {
                         
-                            <a class=" nav-item nav-link nav-tabs" href="@Url.Action("AddQuiz", "Quiz")">Add Quiz</a>
+                            <a class=" nav-link nav-tabs" href="@Url.Action("AddQuiz", "Quiz")">Add Quiz</a>
 
                                 }
                     </li>
-                    <li>
+                <li class="nav-item">
                     @if (userInfo != null && userInfo.Role?.Contains("AdminUser") == true)
                     {
-                            <a class=" nav-item nav-link nav-tabs" href="@Url.Action("Panel", "Admin")">
+                            <a class=" nav-link nav-tabs" href="@Url.Action("Panel", "Admin")">
                                 Admin Panel
                                 <span class=" ui-icon ui-icon-mail-closed"></span>
                                 <span id="msgbadge" class="badge"></span>
@@ -66,18 +66,18 @@
                     }
                     </li>
 
-                    <li>
+                <li class="nav-item">
                         @if (User.Identity.IsAuthenticated)
 
                         {
 
-                            <a data-toggle="dropdown" class=" dropdown nav-item mynavitem dropdown-toggle nav-link">
+                            <a data-toggle="dropdown" class=" dropdown  mynavitem dropdown-toggle nav-link">
                                 @name
 
                             </a>
                             <ul class="dropdown-menu">
-                                <li><a class="nav-link" href="@Url.Action("Logout", "Account")">Logout</a></li>
-                                <li><a class="nav-link" href="@Url.Action("#", "Account")"></a></li>
+                            <li><a class="dropdown-item" href="@Url.Action("Logout", "Account")">Logout</a></li>
+                            <li><a class="dropdown-item" href="@Url.Action("#", "Account")"></a></li>
 
                             </ul>
 
@@ -85,7 +85,7 @@
                         else
                         {
 
-                        <a data-toggle="dropdown" class="list-group-item dropdown nav-item mynavitem dropdown-toggle nav-link">
+                        <a data-toggle="dropdown" class="list-group-item dropdown  mynavitem dropdown-toggle nav-link">
                                 Hello! User
 
                             </a>
@@ -106,8 +106,9 @@
 
 
             </div>
+            
         </nav>
-    </div>
+    
     
     <script type="text/javascript">
 
