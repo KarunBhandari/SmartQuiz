@@ -1,9 +1,0 @@
-﻿using IQMania.Models;
-
-namespace IQMania.Repository.Completion
-{
-    public interface ICompletionRepository
-    {
-        List<UserResult> ViewResult(HttpContext httpContext);
-    }
-}

@@ -12,9 +12,15 @@
 
 <div class="containar" style="font-family:Arial" >
   <div class="row">
+            
     <div class="container" style="background-color:lawngreen; text-align:center"><a>
-                    Let's start IQ Mania Quest @Context.User.FindFirst("Name")?.Value
+                    Let's start IQ Mania Quest @Context.User.FindFirst("Name")?.Value !!
      </a>
+    </div>
+
+            <div id="stopwatch" class="mydiv col-md-3 offset-md-2">
+                <span id="minutes">00</span>:<span id="seconds">00</span>:<span id="milliseconds">00</span>
+            
     </div>
     </div>
     <div style="margin-top:10px">
@@ -49,7 +55,7 @@
                                     <button onclick="setResult(@item.QNO,this.innerText, this)" class="btn btn-info">@item.Option4</button>
                         </div>
                     </div>
-                           
+                            
                 </td>
             </tr>
         }
@@ -69,6 +75,31 @@
                 var counter = index + 1;
                 $(this).prepend(counter + ". ");
             });
+            debugger;
+            var stopwatch = $("#stopwatch");
+            var minutesDisplay = $("#minutes");
+            var secondsDisplay = $("#seconds");
+            var millisecondsDisplay = $("#milliseconds");
+
+            var startTime = new Date().getTime();
+            var interval = setInterval(updateStopwatch, 10);
+
+            function updateStopwatch() {
+                var currentTime = new Date().getTime();
+                var elapsedTime = currentTime - startTime;
+
+                var minutes = Math.floor(elapsedTime / 60000);
+                var seconds = Math.floor((elapsedTime % 60000) / 1000);
+                var milliseconds = elapsedTime % 1000;
+
+                minutesDisplay.text(String(minutes).padStart(2, "0"));
+                secondsDisplay.text(String(seconds).padStart(2, "0"));
+                millisecondsDisplay.text(String(milliseconds).padStart(3, "0"));
+            }
+
+            $(window).on('unload',function(){
+                clearInterval(interval);
+            })
         });
 
         function setResult(quesNo, option, clickedButton) {

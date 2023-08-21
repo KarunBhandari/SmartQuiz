@@ -118,11 +118,6 @@ namespace IQMania.Controllers
             return RedirectToAction("Index", "Quiz");
         }
 
-        [Permission("AdminUser")]
-        public IActionResult AdminPanel()
-        {
-            return View();
-        }
 
         
         [HttpGet]

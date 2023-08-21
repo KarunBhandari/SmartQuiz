@@ -19,9 +19,7 @@ namespace IQMania.Controllers
         }
         public IActionResult ViewResult()
         {
-            _ = new UserResult();
-
-            List<UserResult> userResult = _repository.ViewResult(HttpContext);
+            Marksheet userResult = _repository.ViewResult(HttpContext);
 
 
             return View(userResult);
