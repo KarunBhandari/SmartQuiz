@@ -10,11 +10,14 @@ using Microsoft.AspNetCore.Http;
 using System.Xml.Linq;
 using System.Net.Http;
 using Repository;
+using NuGet.Protocol.Plugins;
+using System.Runtime.CompilerServices;
 
 namespace IQMania.Repository
 {
     public class QuizServices : IQuizServices
     {
+        private static readonly Serilog.ILogger Log = Serilog.Log.ForContext<QuizServices>();
         readonly Dao connection1;
         private readonly IHttpContextAccessor _contextAccessor;
         private string Constr { get; set; }
@@ -96,39 +99,38 @@ namespace IQMania.Repository
         public ResponseResult AddMCQ(AddQuiz addQuiz)
         {
             ResponseResult response = new();
+            string sql = "Exec spAddUserQuestion @flag='User'";
+            sql += " ,@Questions=" + connection1.FilterString(addQuiz.QuizQuestion);
+            sql += " ,@Answer=" + connection1.FilterString(addQuiz.QuizAnswer);
+            sql += " ,@Category=" + connection1.FilterString(addQuiz.Category);
+            sql += " ,@Option1=" + connection1.FilterString(addQuiz.Option1);
+            sql += " ,@Option2=" + connection1.FilterString(addQuiz.Option2);
+            sql += " ,@Option3=" + connection1.FilterString(addQuiz.Option3);
+            sql += " ,@Option4=" + connection1.FilterString(addQuiz.Option4);
             try
             {
-                using (SqlConnection con = new(Constr))
+
+                var dbRes = connection1.ExecuteDataTable(sql);
+                if (dbRes != null)
                 {
-                    SqlCommand command = new("spAddMCQ", con)
-                    {
-                        CommandType = CommandType.StoredProcedure
-                    };
-                    command.Parameters.AddWithValue("@flag", "AddminUser");
-                    command.Parameters.AddWithValue("@Question", addQuiz.QuizQuestion);
-                    command.Parameters.AddWithValue("@Answer", addQuiz.QuizAnswer);
-                    command.Parameters.AddWithValue("@Category", addQuiz.Category);
-                    command.Parameters.AddWithValue("@Option1", addQuiz.Option1);
-                    command.Parameters.AddWithValue("@Option2", addQuiz.Option2);
-                    command.Parameters.AddWithValue("@Option3", addQuiz.Option3);
-                    command.Parameters.AddWithValue("@Option4", addQuiz.Option4);
-
-
-                    con.Open();
-                    int effect = command.ExecuteNonQuery();
-
-
-                    response.ResponseCode = 200;
-                    response.ResponseDescription = "Successfully inserted the QuestionSet";
-
+                    response.ResponseCode = Convert.ToInt32(dbRes.Rows[0]["ResponseCode"]);
+                    response.ResponseDescription = (dbRes.Rows[0]["ResponseDescription"]).ToString();
+                    return response;
                 }
+                response.ResponseCode = 304;
+                response.ResponseDescription = "Could not insert into database";
+                return response;
+
             }
             catch (Exception ex)
             {
-                response.ResponseCode = 404;
-                response.ResponseDescription = "Error Occured " + ex.Message;
+                Log.Error("Exception occured at adding questions by generaluser" + ex.Message, ex);
+                response.ResponseCode = 500;
+                response.ResponseDescription = "Internal Server Error";
+
             }
             return response;
+            
         }
 
 
@@ -140,7 +142,7 @@ namespace IQMania.Repository
             {
                 using (SqlConnection con = new(Constr))
                 {
-                    string?
+                    string
                     claimUserID = httpContext.User.FindFirst("UserId")?.Value.ToString();
                     int UserID = 0;
                     if (int.TryParse(claimUserID, out int parsedUserID))

@@ -27,9 +27,9 @@ namespace IQMania.Repository.Completion
 
         }
 
-        public List<UserResult> ViewResult(HttpContext httpContext)
+        public Marksheet ViewResult(HttpContext httpContext)
         {
-            List<UserResult> results = new List<UserResult>();
+            Marksheet results = new Marksheet();
          
             
             using (SqlConnection sqlConnection = new(Constr))
@@ -49,22 +49,37 @@ namespace IQMania.Repository.Completion
                 sqlConnection.Open();
                  _ = cmd.ExecuteNonQuery();
                 SqlDataReader rdr = cmd.ExecuteReader();
+                    double marks = 0;
+                    int qno = 1;
+                    var markledger = new List<UserResult>();
                     while (rdr.Read())
                     {
                         var status = Convert.ToInt32(rdr["IsCorrect"]);
-                        UserResult account = new()
+
+                        markledger.Add(new UserResult()
                         {
-                            QId = Convert.ToInt32(rdr["QID"]),
+                            QId = qno,
                             Question = rdr["Questions"].ToString(),
                             Answer = rdr["Answer"].ToString(),
                             SubmittedAnswer = rdr["SubmittedAnswer"].ToString(),
                             IsCorrect = (status == 0) ? "Incorrect" : "Correct",
-                        };
+                           
+                    });
+                            qno++;
+                        results.QuestionResult = markledger;
+                        if(status == 1)
+                        {
+                            marks= marks+status*2;
+                        }
+                        else
+                        {
+                            marks = marks - 0.5;
+                        }
+                        
 
-
-
-                        results.Add(account);
+                        
                     }
+                    results.Result = marks;
                 }
                 return results;
             }

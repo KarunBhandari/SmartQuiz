@@ -106,6 +106,7 @@ namespace IQMania.Repository
             catch (Exception ex)
             {
                 result.ResponseDescription=ex.Message;
+                
             }
               
             return result;

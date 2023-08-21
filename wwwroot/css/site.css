@@ -14,9 +14,7 @@ html {
 
 .mynavbar{
     font-family:Arial;
-    background-color: lightgreen;
-    
-    
+    background-color: lightgreen;  
 }
 
 .mynavitem{
@@ -24,14 +22,23 @@ html {
 }
 
 a.nav.nav-link.nav-tabs::before {
-    content: none; /* Some Unicode character or icon code */
+    content:none; /* Some Unicode character or icon code */
     /* Other styles */
 }
 
-    a.nav-link::before{
-        content: none;
-    }
+a.nav-link::before
+{
+    content:none;
+}
+a.dropdown.mynavitem.dropdown-toggle.nav-link::before {
+    content:none;
+}
 
+.mydiv{
+    height:auto;
+    margin: 4px 7px 4px 4px;
+    border-color: chocolate
+}
 
 .nav-link{
     color:black;

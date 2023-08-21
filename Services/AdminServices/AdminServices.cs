@@ -10,8 +10,10 @@ namespace IQMania.Repository.AdminRepository
     public class AdminServices: IAdminServices
     {
       Dao connection;
+        private static readonly Serilog.ILogger Log = Serilog.Log.ForContext<QuizServices>();
         public AdminServices() {
             connection = new Dao();
+            
         }
 
         public Messages GetAdminMessages()
@@ -29,11 +31,15 @@ namespace IQMania.Repository.AdminRepository
                     messages.ResponseDescription = "Successfully retrived admin messages";
 
                 }
+                
             }
             catch (Exception ex)
             {
+                string message = ex.Message;
                 messages.ResponseCode = 400;
-                messages.ResponseDescription = ex.Message;
+                messages.ResponseDescription = message;
+                
+               Log.Error("Exception"+message+ "occured");
             }
             
             return messages;
@@ -43,33 +49,28 @@ namespace IQMania.Repository.AdminRepository
         public ResponseResult AddMCQ(AddQuiz addQuiz)
         {
             ResponseResult response = new();
-            string sql = "Exec spAddUserQuestion @flag=''";
+            string sql = "Exec spAddMCQ @flag='AddminUser'";
+            sql += " ,@Question=" + addQuiz.QuizQuestion;
+            sql += " ,@Answer=" + addQuiz.QuizQuestion;
+            sql += " ,@Category= " + addQuiz.QuizQuestion;
+            sql += " ,@Option1= " + addQuiz.Option1;
+            sql += " ,@Option2= " + addQuiz.Option2;
+            sql += " ,@Option3= " + addQuiz.Option3;
+            sql += " ,@Option4= " + addQuiz.Option4;
             try
             {
-                
+                var dbRes = connection.ExecuteDataTable(sql);
+                if(dbRes != null)
                 {
-                    SqlCommand command = new("spAddMCQ")
-                    {
-                        CommandType = CommandType.StoredProcedure
-                    };
-                    command.Parameters.AddWithValue("@flag", "AddminUser");
-                    command.Parameters.AddWithValue("@Question", addQuiz.QuizQuestion);
-                    command.Parameters.AddWithValue("@Answer", addQuiz.QuizAnswer);
-                    command.Parameters.AddWithValue("@Category", addQuiz.Category);
-                    command.Parameters.AddWithValue("@Option1", addQuiz.Option1);
-                    command.Parameters.AddWithValue("@Option2", addQuiz.Option2);
-                    command.Parameters.AddWithValue("@Option3", addQuiz.Option3);
-                    command.Parameters.AddWithValue("@Option4", addQuiz.Option4);
+                    response.ResponseCode = Convert.ToInt32(dbRes.Rows[0]["ResponseCode"]);
+                    response.ResponseDescription = (dbRes.Rows[0]["ResponseDescription"]).ToString();
 
-
-                  
-                    int effect = command.ExecuteNonQuery();
-
+                }
 
                     response.ResponseCode = 200;
                     response.ResponseDescription = "Successfully inserted the QuestionSet";
 
-                }
+                return response;
             }
             catch (Exception ex)
             {

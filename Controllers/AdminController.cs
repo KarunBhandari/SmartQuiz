@@ -16,6 +16,8 @@ namespace IQMania.Controllers
         {
             _adminRepository = adminRepository;
         }
+
+        [Permission("AdminUser")]
         public IActionResult Panel()
         {
             return View();

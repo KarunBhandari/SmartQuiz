@@ -1,5 +1,5 @@
 Exec sp_helptext spAddUserQuestion
-Create procedure spAddUserQuestion @Questions nvarchar(300), @Answer nvarchar(70), @Category nvarchar(15),     
+Alter procedure spAddUserQuestion @Questions nvarchar(300), @Answer nvarchar(70), @Category nvarchar(15),     
  @Option1 nvarchar(70), @Option2 nvarchar(70), @Option3 nvarchar(70), @Option4 nvarchar(70),  
  @flag nvarchar(15)  
  As  
@@ -8,27 +8,18 @@ Create procedure spAddUserQuestion @Questions nvarchar(300), @Answer nvarchar(70
  Declare @responsecode int  
   Begin Try  
    IF (@flag = 'User')  
-    BEGIN  
-      -- Insert options  
+    BEGIN   
       INSERT INTO Questionaddedbyuser Values( @Questions, @Answer, @Category, @Option1, @Option2, @Option3, @Option4)  
    Set @responsecode=200; Set @responsedescription = 'Successfully added Questions'  
     END  
  ELSE  
     BEGIN  
-      -- Handle the case when @flag is not 'AddminUser'  
-      -- You can add code here to handle this scenario, or simply raise an error  
+      
       Set @responsecode=401; Set @responsedescription = 'Unauthorized Access'  
     END  
   END TRY  
   BEGIN CATCH  
-    -- Handle the error here  
     Set @responsecode=400; Set @responsedescription = 'Bad Request'  
-  
-    -- You can log the error or take appropriate actions based on the error  
-    -- For example, you can use PRINT to output the error message  
-  
-    -- You can re-raise the error to the client if needed  
-    -- RAISERROR(@ErrorMessage, @ErrorSeverity, @ErrorState)  
   END CATCH  
   Select @responsedescription as ResponseDescription, @responsecode as ResponseCode  
 END
@@ -122,4 +113,6 @@ Begin
 End
 
 Use IQ_Mania
-Exec spSearchquestiontext 'Jung', 'Search'
+Exec spSearchquestiontext 'Match', 'Search'
+
+Select 

@@ -1,6 +1,7 @@
 ﻿@using IQMania.Models;
 @using IQMania.Helper;
-@model IEnumerable<UserResult>
+
+@model Marksheet;
 
 @{
     var userInfo = Context.GetLoginDetails();
@@ -37,28 +38,23 @@
                     <th>Contact:</th>
                     <td><p>@phone</p></td>
                 </tr>
+                <tr>
+                    <th> MarksObtained:</th>
+                    <td><p>@Model.Result</p></td>
+                </tr>
             </table>
         </div>
     </div>
     <div class="container">
         <table class="table table-bordered" style="border-width:2px">
             <tr>
-                <th class = "col-1 hidden-sm">
-                    @Html.DisplayNameFor(model => model.QId)
-                </th>
-                <th class="col-5 col-sm-6">
-                        @Html.DisplayNameFor(model => model.Question)
-                </th>
-                <th class="col-2">
-                        @Html.DisplayNameFor(model => model.Answer)
-                </th>
-                <th class="col-2">
-                        @Html.DisplayNameFor(model => model.SubmittedAnswer)
-                </th>
-                <th class="col-2">
-                        @Html.DisplayNameFor(model => model.IsCorrect)
-                </th>
-                @foreach (var item in Model)
+                
+                <th class = "col-1 hidden-sm">QID</th>
+                <th class="col-5 col-sm-6">Question</th>
+                <th class="col-2">Answer</th>
+                <th class="col-2">SubmittedAnswer</th>
+                <th class="col-2">IsCorrect</th>
+                @foreach (var item in Model.QuestionResult)
                 {
                 <tr>    
         <td >
@@ -85,7 +81,4 @@
         </table>
     </div>
 </div>
-<div>
-    @Html.ActionLink("Edit", "Edit", new { /* id = Model.PrimaryKey */ }) |
-    <a asp-action="Index" asp-controller="Quiz">Back to List</a>
-</div>
+
