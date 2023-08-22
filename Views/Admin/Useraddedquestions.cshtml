@@ -1,0 +1,59 @@
+﻿@using IQMania.Models.Quiz;
+@model Getaddquiz;
+@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+}
+<div class="accordion" id="accordionExample">
+    <div class="card">
+        <div class="card-header" id="headingOne">
+            <h2 class="mb-0">
+                <button class="btn btn-link btn-block text-left" type="button" data-toggle="collapse" data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+                    Question Added by user
+                </button>
+            </h2>
+        </div>
+
+        <div id="collapseOne" class="collapse show" aria-labelledby="headingOne" data-parent="#accordionExample">
+            <div class="card-body">
+                <table class="table-bordered">
+                    <tr>
+                        <th>S.N</th>
+                        <th>Question</th>
+                        <th>Answer</th>
+                        <th>Category</th>
+                        <th>Option1</th>
+                        <th>Option2</th>
+                        <th>Option3</th>
+                        <th>Option4</th>
+                    </tr>
+                    @foreach(var item in Model.userAddedQuizzes)
+                    {
+                    <tr>
+                            <td><input value="@item.QID" /></td>
+                            <td><input value="@item.QuizQuestion" /></td>
+                            <td><input value="@item.QuizAnswer" /></td>
+                            <td><input value="@item.Category" /></td>
+                            <td><input value="@item.Option1" /></td>
+                            <td><input value="@item.Option2" /></td>
+                            <td><input value="@item.Option3" /></td>
+                            <td><input value="@item.Option4" /></td>
+                        </tr>
+                        <tr>
+                            <td colspan="8" class ="col-12">
+                            <btn class="btn btn-info">Edit</btn>
+                            <btn class="btn btn-warning">Add</btn>
+                            <btn class="btn btn-danger">Delete</btn>
+                            </td>
+                        </tr>
+                    
+                    }
+                </table>
+            </div>
+        </div>
+    </div>
+    
+    
+</div>
+

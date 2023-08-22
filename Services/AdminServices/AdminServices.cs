@@ -4,6 +4,7 @@ using IQMania.Helper;
 using System.Data.SqlClient;
 using IQMania.Models.Quiz;
 using System.Data;
+using Serilog;
 
 namespace IQMania.Repository.AdminRepository
 {
@@ -80,6 +81,57 @@ namespace IQMania.Repository.AdminRepository
             return response;
         }
 
+        public Getaddquiz Getuseraddedquestions()
+        {
+            Getaddquiz userquiz = new Getaddquiz();
+            string sql = "Exec spGetUserAddedQuestions @flag = 'Adminuser'";
+            try
+            {
+                var dbResp = connection.ExecuteDataset(sql);
+                if(dbResp != null)
+                {
+                    var response1 = dbResp.Tables[0].Rows[0];
+                    userquiz.ResponseCode = Convert.ToInt32(response1["ResponseCode"]);
+                    userquiz.ResponseDescription = (response1["ResponseDescription"]).ToString();
+                    if(userquiz.ResponseCode == 200)
+                    {
+                        var response2 = dbResp.Tables[1];
+                        int i = 0;
+                        var listData = new List<AddQuiz>();
+                        foreach (DataRow dr in response2.Rows)
+                        {
+                            listData.Add(new AddQuiz()
+                            {
+                                QID = i + 1,
+                                QuizQuestion = (response2.Rows[0]["Questions"]).ToString(),
+                                QuizAnswer = (response2.Rows[0]["Answer"]).ToString(),
+                                Category = (response2.Rows[0]["Category"]).ToString(),
+                                Option1 = (response2.Rows[0]["OPtion1"]).ToString(),
+                                Option2 = (response2.Rows[0]["Option2"]).ToString(),
+                                Option3 = (response2.Rows[0]["Option3"]).ToString(),
+                                Option4 = (response2.Rows[0]["Option4"]).ToString(),
+
+                            }) ;
+                            i++;
+                            userquiz.userAddedQuizzes = listData.ToList();
+                        }
+                        return userquiz;
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                userquiz.ResponseCode = 500;
+                userquiz.ResponseDescription = "Internal Error Occured";
+                Log.Error("Error occured while loading User added questions" +ex.Message);
+            }
+            return userquiz;
+        }
+        public ResponseResult RemoveMCQ()
+        {
+            ResponseResult response = new ResponseResult();
+            return response;
+        }
 
     }
 }

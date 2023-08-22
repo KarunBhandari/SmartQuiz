@@ -19,7 +19,7 @@
     </div>
 
             <div id="stopwatch" class="mydiv col-md-3 offset-md-2">
-                <span id="minutes">00</span>:<span id="seconds">00</span>:<span id="milliseconds">00</span>
+                <span id="minutes">00</span>:<span id="seconds">00</span>
             
     </div>
     </div>
@@ -79,7 +79,7 @@
             var stopwatch = $("#stopwatch");
             var minutesDisplay = $("#minutes");
             var secondsDisplay = $("#seconds");
-            var millisecondsDisplay = $("#milliseconds");
+            
 
             var startTime = new Date().getTime();
             var interval = setInterval(updateStopwatch, 10);
@@ -90,11 +90,9 @@
 
                 var minutes = Math.floor(elapsedTime / 60000);
                 var seconds = Math.floor((elapsedTime % 60000) / 1000);
-                var milliseconds = elapsedTime % 1000;
 
                 minutesDisplay.text(String(minutes).padStart(2, "0"));
                 secondsDisplay.text(String(seconds).padStart(2, "0"));
-                millisecondsDisplay.text(String(milliseconds).padStart(3, "0"));
             }
 
             $(window).on('unload',function(){

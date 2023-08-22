@@ -113,6 +113,45 @@ Begin
 End
 
 Use IQ_Mania
-Exec sp_helptext spSearchquestiontext 'Match', 'Search'
+Exec spSearchquestiontext '%59%', 'Search'
 
-Select 
+Select * from Questionaddedbyuser
+Select * from tblQuestions
+Select Replace(data,' ', '') from (Select 'The Man who sold the Earth' data)x 
+Select * from tblOptions
+
+UPDATE tblQuestions
+SET Questions = REPLACE(Questions,
+'Match the following:  a) Gatthigal - 1) Chitwan  b) The Lake where Cock roars - 2) Myagdi    c) Rupse jharana - 3) Myagdi  d) Bishajari Taal - 4) Baitadi',
+'<p>Match the following:</p><p> a) Gatthigal &nbsp &nbsp &nbsp 1) Chitwan </p> <p> b) The Lake where Cock roars &nbsp &nbsp 2) Myagdi </p> <p>  c) Rupse jharana &nbsp &nbsp 3) Myagdi </p> <p> d) Bishajari Taal &nbsp &nbsp 4) Baitadi </p>')
+ WHERE Question_Number = 59
+ Select * from tblAccount
+
+ ----------------------------------------------------------------------
+ Alter procedure spGetUserAddedQuestions
+ @flag nvarchar(10)
+ as
+ Begin
+	Declare @responsecode int; Declare @responsedescription nvarchar(35)
+	 If(@flag = 'AdminUser')
+		Begin
+		Set @responsecode = 200;
+			If Exists(Select * from Questionaddedbyuser)
+			 Begin
+				Set @responsedescription = 'Questionaddedbyuser table is empty';
+				Select @responsecode as ResponseCode, @responsedescription as ResponseDescription;
+				Select * from Questionaddedbyuser
+			End
+			Else
+				Begin
+				 Set @responsedescription = 'Questionaddedbyuser table is empty';
+				 Select @responsecode as ResponseCode, @responsedescription as ResponseDescription;
+			End
+		End
+	Else
+    	Begin
+    	Set @responsecode = 401;Set @responsedescription = 'Access denied';
+		 Select @responsecode as ResponseCode, @responsedescription as ResponseDescription; 
+    End
+End
+Exec spGetUserAddedQuestions 'Adminuser'

@@ -4,6 +4,8 @@ namespace IQMania.Models.Quiz
 {
     public class AddQuiz
     {
+        
+        public int QID { get; set; }
         [Required]
         public string QuizQuestion { get; set; }
         [Required]
@@ -18,5 +20,9 @@ namespace IQMania.Models.Quiz
         public string Option3 { get; set;}
         [Required]
         public string Option4 { get; set; }
+    }
+    public class Getaddquiz : ResponseResult
+    {
+        public List<AddQuiz> userAddedQuizzes { get; set;}
     }
 }

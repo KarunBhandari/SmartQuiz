@@ -1,5 +1,8 @@
-﻿using IQMania.Models.Quiz;
+﻿using IQMania.Helper;
+using IQMania.Models.Account;
+using IQMania.Models.Quiz;
 using IQMania.Repository;
+using IQMania.Repository.AdminRepository;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
@@ -11,10 +14,12 @@ namespace IQMania.Controllers
 
         public readonly IQuizServices _quizRepository;
         private readonly IHttpContextAccessor _contextAccessor;
-        public QuizController(IQuizServices quizRepository, IHttpContextAccessor httpContext)
+        private readonly IAdminServices _adminServices;
+        public QuizController(IQuizServices quizRepository, IHttpContextAccessor httpContext, IAdminServices adminServices)
         {
             _contextAccessor = httpContext;
             _quizRepository = quizRepository;
+            _adminServices = adminServices;
         }
 
 
@@ -58,14 +63,24 @@ namespace IQMania.Controllers
             return View();
         }
 
-
+        [Authorize]
         public JsonResult AddQuiz(AddQuiz addQuiz)
         {
+            
             ResponseResult response = new();
             if (ModelState.IsValid)
             {
+                var userinfo = HttpContext.GetLoginDetails();
+                var role = userinfo?.Role;
 
-                response = _quizRepository.AddMCQ(addQuiz);
+                Messages messages = new();
+                if (userinfo != null && role?.Contains("AdminUser") == true)
+                {
+                    response = _adminServices.AddMCQ(addQuiz);
+                    return Json(response);
+                }
+
+                    response = _quizRepository.AddMCQ(addQuiz);
                 return Json(response);
             }
             response = new ResponseResult() { ResponseCode = 400, ResponseDescription = "Bad Request! Invalid Information provided" };

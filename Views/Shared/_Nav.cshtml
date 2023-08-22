@@ -23,12 +23,12 @@
 
 <header>
     
-        <nav class="navbar navbar-expand-lg mynavbar">
+        <nav class="navbar navbar-expand-md mynavbar">
             
 
-            <img class=" img-fluid d-none d-sm-block" href="@Url.Action("Index", "Quiz")" src="~/Photos/Icon/Silver Icon.jpg" margin-top:0; margin-bottom:0" />
+            <img class="navbar-brand img-fluid d-none d-sm-block" href="@Url.Action("Index", "Quiz")" src="~/Photos/Icon/Silver Icon.jpg" margin-top:0; margin-bottom:0" />
 
-            <button class=" navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <button class=" navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent">
                 <span class="navbar-toggler-icon"></span>
             </button>
 
@@ -58,7 +58,7 @@
                 <li class="nav-item">
                     @if (userInfo != null && userInfo.Role?.Contains("AdminUser") == true)
                     {
-                            <a class=" nav-link nav-tabs" href="@Url.Action("Panel", "Admin")">
+                        <a class=" nav-link nav-tabs" href="@Url.Action("Useraddedquestions", "Admin")">
                                 Admin Panel
                                 <span class=" ui-icon ui-icon-mail-closed"></span>
                                 <span id="msgbadge" class="badge"></span>
