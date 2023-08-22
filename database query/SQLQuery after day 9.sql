@@ -246,8 +246,6 @@ Alter procedure spAddUserQuestion @Questions nvarchar(300), @Answer nvarchar(70)
     END
 	ELSE
     BEGIN
-      -- Handle the case when @flag is not 'AddminUser'
-      -- You can add code here to handle this scenario, or simply raise an error
       RAISERROR('Invalid flag value. Expected "AddminUser".', 16, 1)
     END
   END TRY
@@ -261,12 +259,10 @@ Alter procedure spAddUserQuestion @Questions nvarchar(300), @Answer nvarchar(70)
     -- For example, you can use PRINT to output the error message
     Select 'Error: ' + @ErrorMessage
 
-    -- You can re-raise the error to the client if needed
-    -- RAISERROR(@ErrorMessage, @ErrorSeverity, @ErrorState)
   END CATCH
 END
 
-Exec spAddUserQuestion 'jghhj', 'hjhj', 'hjhj', 'hjhj', 'hjhj', 'hjhj','hjhj', 'dfdf'
+Exec sp_helptext spAddUserQuestion 'jghhj', 'hjhj', 'hjhj', 'hjhj', 'hjhj', 'hjhj','hjhj', 'dfdf'
 --------------------
 select * from Questionaddedbyuser
 truncate table Questionaddedbyuser

@@ -113,6 +113,6 @@ Begin
 End
 
 Use IQ_Mania
-Exec spSearchquestiontext 'Match', 'Search'
+Exec sp_helptext spSearchquestiontext 'Match', 'Search'
 
 Select 
