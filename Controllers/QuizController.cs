@@ -25,11 +25,11 @@ namespace IQMania.Controllers
 
        readonly List<Category> categories = new()
        {
-                new Category{ Id = 0, category = "History" },
-                new Category{ Id = 1, category = "Geography" },
-                new Category{ Id = 2, category = "Economy" },
-                new Category{ Id = 3, category = "Politics" },
-                new Category{ Id = 4, category = "Time and Events" },
+                new Category{ Id = 1, category = "History" },
+                new Category{ Id = 2, category = "Geography" },
+                new Category{ Id = 3, category = "Economy" },
+                new Category{ Id = 4, category = "Politics" },
+                new Category{ Id = 5, category = "Time and Events" },
             };
 
         public IActionResult Index()
@@ -46,11 +46,16 @@ namespace IQMania.Controllers
 
         public IActionResult CategoryWiseQuestions(int id)
         {
-
+            List<Questions> questions;
+            if (id == 0)
+            {
+                questions = null;
+                return View(questions);
+            }
             Category categoryy = categories[id];
             //var questions  = new List<Questions>();
             string dropdownValue = categoryy.category;
-            List<Questions> questions = _quizRepository.ReadIq(dropdownValue).ToList();
+             questions = _quizRepository.ReadIq(dropdownValue).ToList();
 
             return View(questions);
         }
@@ -67,20 +72,20 @@ namespace IQMania.Controllers
         public JsonResult AddQuiz(AddQuiz addQuiz)
         {
             
-            ResponseResult response = new();
+            
+            ResponseResult response;
             if (ModelState.IsValid)
             {
                 var userinfo = HttpContext.GetLoginDetails();
                 var role = userinfo?.Role;
 
-                Messages messages = new();
                 if (userinfo != null && role?.Contains("AdminUser") == true)
                 {
                     response = _adminServices.AddMCQ(addQuiz);
                     return Json(response);
                 }
 
-                    response = _quizRepository.AddMCQ(addQuiz);
+                response = _quizRepository.AddMCQ(addQuiz);
                 return Json(response);
             }
             response = new ResponseResult() { ResponseCode = 400, ResponseDescription = "Bad Request! Invalid Information provided" };

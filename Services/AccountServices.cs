@@ -20,10 +20,10 @@ namespace IQMania.Repository
         {
             ResponseResult responseResult = new();
             string Sql = "Exec spcreateUser @flag = 'Signup'";
-            Sql += " ,@Fullname= " + connection1.FilterString(signup.Name);
-            Sql += " ,@Email= " + connection1.FilterString(signup.Email);
-            Sql += " ,@Phone= " + connection1.FilterString(signup.Phonenumber);
-            Sql += " ,@Password= " + connection1.FilterString(signup.Password);
+            Sql += " ,@Fullname= " + Dao.FilterString(signup.Name);
+            Sql += " ,@Email= " + Dao.FilterString(signup.Email);
+            Sql += " ,@Phone= " + Dao.FilterString(signup.Phonenumber);
+            Sql += " ,@Password= " + Dao.FilterString(signup.Password);
             try {
 
                 var response = connection1.ExecuteDataRow(Sql);
@@ -48,8 +48,8 @@ namespace IQMania.Repository
             
             Account account = new();
             string Sql = "Exec spGetLogininfo @flag='AuthLogin',";
-            Sql += " @Email = " + connection1.FilterString(login.Email);
-            Sql += ", @Password = " + connection1.FilterString(login.Password);
+            Sql += " @Email = " + Dao.FilterString(login.Email);
+            Sql += ", @Password = " + Dao.FilterString(login.Password);
             
             try{
 
@@ -92,10 +92,10 @@ namespace IQMania.Repository
             try
             {
                 string sql = "Exec spEditprofile @flag = 'changepass'";
-                sql += ",@Fullname=" + connection1.FilterString(signup.Name);
-                sql += ",@Email=" + connection1.FilterString(signup.Email);
-                sql += ",@Phone=" + connection1.FilterString(signup.Phonenumber);
-                sql += ",@Password=" + connection1.FilterString(signup.Password);
+                sql += ",@Fullname=" + Dao.FilterString(signup.Name);
+                sql += ",@Email=" + Dao.FilterString(signup.Email);
+                sql += ",@Phone=" + Dao.FilterString(signup.Phonenumber);
+                sql += ",@Password=" + Dao.FilterString(signup.Password);
                 var dbRes = connection1.ExecuteDataTable(sql);
                 if (dbRes != null)
                 {

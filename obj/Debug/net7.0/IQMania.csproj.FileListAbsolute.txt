@@ -1183,3 +1183,5 @@ C:\Users\karun.bhandari\Desktop\projects\SmartQuiz\obj\Debug\net7.0\refint\IQMan
 C:\Users\karun.bhandari\Desktop\projects\SmartQuiz\obj\Debug\net7.0\IQMania.pdb
 C:\Users\karun.bhandari\Desktop\projects\SmartQuiz\obj\Debug\net7.0\IQMania.genruntimeconfig.cache
 C:\Users\karun.bhandari\Desktop\projects\SmartQuiz\obj\Debug\net7.0\ref\IQMania.dll
+C:\Users\karun.bhandari\Desktop\projects\SmartQuiz\obj\Debug\net7.0\IQMania.Properties.Resources.resources
+C:\Users\karun.bhandari\Desktop\projects\SmartQuiz\obj\Debug\net7.0\IQMania.csproj.GenerateResource.cache
