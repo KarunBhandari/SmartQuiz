@@ -1,9 +1,9 @@
 ﻿using IQMania.Helper;
 using IQMania.Models.Account;
+using IQMania.Models.Quiz;
 using IQMania.Repository.AdminRepository;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.CodeAnalysis.CSharp.Syntax;
 
 namespace IQMania.Controllers
 {
@@ -23,7 +23,7 @@ namespace IQMania.Controllers
             return View();
         }
 
-        
+        [Permission("AdminUser")]
         public JsonResult Count()
         {
 
@@ -41,5 +41,34 @@ namespace IQMania.Controllers
             return Json(messages);
 
         }
+
+        [Permission("AdminUser")]
+        public IActionResult Useraddedquestions()
+        {
+            Getaddquiz getaddquiz = new();
+            getaddquiz = _adminRepository.Getuseraddedquestions();
+            if(getaddquiz != null)
+            {
+                    ViewBag.message = getaddquiz.ResponseDescription;
+                return View(getaddquiz);
+                
+            }
+            return View();
+        }
+
+        [Permission("AdminUser")]
+        public IActionResult Userremovedquestions()
+        {
+            Getaddquiz getaddquiz = new();
+            return View(getaddquiz);
+        }
+
+        [Permission("AdminUser")]
+        public IActionResult Addquestions()
+        {
+            Getaddquiz getaddquiz = new();
+            return View(getaddquiz);
+        }
+
     }
 }

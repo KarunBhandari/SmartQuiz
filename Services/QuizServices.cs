@@ -100,13 +100,13 @@ namespace IQMania.Repository
         {
             ResponseResult response = new();
             string sql = "Exec spAddUserQuestion @flag='User'";
-            sql += " ,@Questions=" + connection1.FilterString(addQuiz.QuizQuestion);
-            sql += " ,@Answer=" + connection1.FilterString(addQuiz.QuizAnswer);
-            sql += " ,@Category=" + connection1.FilterString(addQuiz.Category);
-            sql += " ,@Option1=" + connection1.FilterString(addQuiz.Option1);
-            sql += " ,@Option2=" + connection1.FilterString(addQuiz.Option2);
-            sql += " ,@Option3=" + connection1.FilterString(addQuiz.Option3);
-            sql += " ,@Option4=" + connection1.FilterString(addQuiz.Option4);
+            sql += " ,@Questions=" + Dao.FilterString(addQuiz.QuizQuestion);
+            sql += " ,@Answer=" + Dao.FilterString(addQuiz.QuizAnswer);
+            sql += " ,@Category=" + Dao.FilterString(addQuiz.Category);
+            sql += " ,@Option1=" + Dao.FilterString(addQuiz.Option1);
+            sql += " ,@Option2=" + Dao.FilterString(addQuiz.Option2);
+            sql += " ,@Option3=" + Dao.FilterString(addQuiz.Option3);
+            sql += " ,@Option4=" + Dao.FilterString(addQuiz.Option4);
             try
             {
 
@@ -182,7 +182,7 @@ namespace IQMania.Repository
             Questions qstn = new();
             SearchResult questions = new();
             string sql = "Exec spSearchquestiontext @flag = 'Search'";
-            sql += ", @inputtext = " + connection1.FilterString(query);
+            sql += ", @inputtext = " + Dao.FilterString(query);
             try
             {
                 var response = await Task.Run(() => connection1.ExecuteDataset(sql));

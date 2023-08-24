@@ -1,0 +1,92 @@
+﻿@using IQMania.Models.Quiz;
+@model Getaddquiz;
+@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+}
+<div class="accordion d-inline-block" id="accordionExample">
+    <div class="card">
+        <div class="card-header" id="headingOne">
+            <h2 class="mb-0">
+                <button class="btn btn-secondary btn-block text-left" type="button" data-toggle="collapse" data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+                    Questions Added by user
+                </button>
+            </h2>
+        </div>
+
+        <div id="collapseOne" class="collapse  d-inline-block" aria-labelledby="headingOne" data-parent="#accordionExample">
+            <div class="card-body  d-inline-block">
+                <table class="table-bordered table-info">
+                    <tr>
+                        <th>S.N</th>
+                        <th>Question</th>
+                        <th>Answer</th>
+                        <th>Category</th>
+                        <th>Option1</th>
+                        <th>Option2</th>
+                        <th>Option3</th>
+                        <th>Option4</th>
+                    </tr>
+                    @foreach(var item in Model.userAddedQuizzes)
+                    {
+                    <tr class="mcqs">
+                            <td><input class="itemid" value="@item.QID" /></td>
+                            <td><input class="itemqstn" value="@item.QuizQuestion" /></td>
+                            <td><input class="itemans" value="@item.QuizAnswer" /></td>
+                            <td><input class="itemcat" value="@item.Category" /></td>
+                            <td><input class="itemop1" value="@item.Option1" /></td>
+                            <td><input class="itemop2" value="@item.Option2" /></td>
+                            <td><input class="itemop3" value="@item.Option3" /></td>
+                            <td><input class="itemop4" value="@item.Option4" /></td>
+                        </tr>
+                        <tr>
+                            <td colspan="8" class ="col-12">
+                            <button class="btn btn-info editqstn">Edit</button>
+                            <button class="btn btn-warning">Add</button>
+                            <button class="btn btn-danger">Delete</button>
+                            </td>
+                        </tr>
+                    
+                    }
+                </table>
+            </div>
+        </div>
+    </div>
+    
+    
+</div>
+
+@section Scripts{
+    <script type="text/javascript">
+    $(function(){
+        debugger;
+            $('.editqstn').click(function () {
+                debugger
+                var row = $(this).closest('.mcqs'); 
+                // Get the closest parent <tr> element
+                var itemId = row.find('.itemid').val();
+                console.log(itemId);
+                var itemQuestion = row.find('.itemqstn').val();
+                console.log();
+                var itemAnswer = row.find('.itemans').val();
+                console.log(itemAnswer);
+                var itemCategory = row.find('.itemcat').val();
+                console.log(itemCategory);
+                var itemOption1 = row.find('.itemop1').val();
+                console.log(itemOption1);
+                var itemOption2 = row.find('.itemop2').val();
+                console.log(itemOption2);
+                var itemOption3 = row.find('.itemop3').val();
+                console.log(itemOption3);
+                var itemOption4 = row.find('.itemop4').val();
+                console.log(itemOption4);
+               
+                // Now you have all the values from the input fields for the corresponding row
+            });
+
+
+            
+    });    
+    </script>
+}
