@@ -1,5 +1,5 @@
-﻿@using IQMania.Models.Quiz
-@model IEnumerable<Questions>
+﻿@using IQMania.Models.Quiz;
+@model SearchResult;
 
 @*
     For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
@@ -27,7 +27,7 @@
                     </tr>
                 </thead>
                 <tbody>
-                    @foreach (var item in Model)
+                    @foreach (var item in Model.QuestionList)
                     {
                         <tr>
                             <td>@item.QID</td>

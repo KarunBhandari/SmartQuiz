@@ -243,3 +243,5 @@ X:\DOTNET\SmartQuiz\IQMania\obj\Release\net7.0\refint\IQMania.dll
 X:\DOTNET\SmartQuiz\IQMania\obj\Release\net7.0\IQMania.pdb
 X:\DOTNET\SmartQuiz\IQMania\obj\Release\net7.0\IQMania.genruntimeconfig.cache
 X:\DOTNET\SmartQuiz\IQMania\obj\Release\net7.0\ref\IQMania.dll
+X:\DOTNET\SmartQuiz\IQMania\obj\Release\net7.0\IQMania.Properties.Resources.resources
+X:\DOTNET\SmartQuiz\IQMania\obj\Release\net7.0\IQMania.csproj.GenerateResource.cache

@@ -262,7 +262,7 @@ Alter procedure spAddUserQuestion @Questions nvarchar(300), @Answer nvarchar(70)
   END CATCH
 END
 
-Exec sp_helptext spAddUserQuestion 'jghhj', 'hjhj', 'hjhj', 'hjhj', 'hjhj', 'hjhj','hjhj', 'dfdf'
+Exec  spAddUserQuestion 'jghhj', 'hjhj', 'hjhj', 'hjhj', 'hjhj', 'hjhj','hjhj', 'dfdf'
 --------------------
 select * from Questionaddedbyuser
 truncate table Questionaddedbyuser

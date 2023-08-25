@@ -46,16 +46,27 @@ namespace IQMania.Controllers
 
         public IActionResult CategoryWiseQuestions(int id)
         {
-            List<Questions> questions;
+            SearchResult questions = new SearchResult();
+            var qstnlist = new List<Questions>();
             if (id == 0)
-            {
-                questions = null;
+            { 
+                qstnlist.Add(new Questions
+                {
+                    QID = 0,
+                    Question = "",
+                    Answer = ""
+
+                }); 
+              questions.QuestionList = qstnlist;
+                
                 return View(questions);
             }
-            Category categoryy = categories[id];
+            int cat = id - 1;
+            Category categoryy = categories[cat];
             //var questions  = new List<Questions>();
             string dropdownValue = categoryy.category;
-             questions = _quizRepository.ReadIq(dropdownValue).ToList();
+            qstnlist = _quizRepository.ReadIq(dropdownValue).ToList();
+            questions.QuestionList = qstnlist;
 
             return View(questions);
         }

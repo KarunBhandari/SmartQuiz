@@ -9,93 +9,93 @@ build_property.EnforceExtendedAnalyzerRules =
 build_property._SupportedPlatformList = Linux,macOS,Windows
 build_property.RootNamespace = IQMania
 build_property.RootNamespace = IQMania
-build_property.ProjectDir = C:\Users\karun.bhandari\Desktop\projects\SmartQuiz\
+build_property.ProjectDir = X:\DOTNET\SmartQuiz\IQMania\
 build_property.RazorLangVersion = 7.0
 build_property.SupportLocalizedComponentNames = 
 build_property.GenerateRazorMetadataSourceChecksumAttributes = 
-build_property.MSBuildProjectDirectory = C:\Users\karun.bhandari\Desktop\projects\SmartQuiz
+build_property.MSBuildProjectDirectory = X:\DOTNET\SmartQuiz\IQMania
 build_property._RazorSourceGeneratorDebug = 
 
-[C:/Users/karun.bhandari/Desktop/projects/SmartQuiz/Views/Account/ForgotPassword.cshtml]
+[X:/DOTNET/SmartQuiz/IQMania/Views/Account/ForgotPassword.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQWNjb3VudFxGb3Jnb3RQYXNzd29yZC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/karun.bhandari/Desktop/projects/SmartQuiz/Views/Account/Login.cshtml]
+[X:/DOTNET/SmartQuiz/IQMania/Views/Account/Login.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQWNjb3VudFxMb2dpbi5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/karun.bhandari/Desktop/projects/SmartQuiz/Views/Account/Signup.cshtml]
+[X:/DOTNET/SmartQuiz/IQMania/Views/Account/Signup.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQWNjb3VudFxTaWdudXAuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/karun.bhandari/Desktop/projects/SmartQuiz/Views/Admin/Useraddedquestions.cshtml]
+[X:/DOTNET/SmartQuiz/IQMania/Views/Admin/Useraddedquestions.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQWRtaW5cVXNlcmFkZGVkcXVlc3Rpb25zLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/karun.bhandari/Desktop/projects/SmartQuiz/Views/Completion/ExamFinished.cshtml]
+[X:/DOTNET/SmartQuiz/IQMania/Views/Completion/ExamFinished.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQ29tcGxldGlvblxFeGFtRmluaXNoZWQuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/karun.bhandari/Desktop/projects/SmartQuiz/Views/Completion/ViewResult.cshtml]
+[X:/DOTNET/SmartQuiz/IQMania/Views/Completion/ViewResult.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQ29tcGxldGlvblxWaWV3UmVzdWx0LmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/karun.bhandari/Desktop/projects/SmartQuiz/Views/Home/Index.cshtml]
+[X:/DOTNET/SmartQuiz/IQMania/Views/Home/Index.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSG9tZVxJbmRleC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/karun.bhandari/Desktop/projects/SmartQuiz/Views/Home/Privacy.cshtml]
+[X:/DOTNET/SmartQuiz/IQMania/Views/Home/Privacy.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSG9tZVxQcml2YWN5LmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/karun.bhandari/Desktop/projects/SmartQuiz/Views/Quiz/AddQuiz.cshtml]
+[X:/DOTNET/SmartQuiz/IQMania/Views/Quiz/AddQuiz.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcUXVpelxBZGRRdWl6LmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/karun.bhandari/Desktop/projects/SmartQuiz/Views/Quiz/categoryWiseQuestions.cshtml]
+[X:/DOTNET/SmartQuiz/IQMania/Views/Quiz/categoryWiseQuestions.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcUXVpelxjYXRlZ29yeVdpc2VRdWVzdGlvbnMuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/karun.bhandari/Desktop/projects/SmartQuiz/Views/Quiz/DisplayQuestions.cshtml]
+[X:/DOTNET/SmartQuiz/IQMania/Views/Quiz/DisplayQuestions.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcUXVpelxEaXNwbGF5UXVlc3Rpb25zLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/karun.bhandari/Desktop/projects/SmartQuiz/Views/Quiz/Index.cshtml]
+[X:/DOTNET/SmartQuiz/IQMania/Views/Quiz/Index.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcUXVpelxJbmRleC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/karun.bhandari/Desktop/projects/SmartQuiz/Views/Quiz/PlayQuiz.cshtml]
+[X:/DOTNET/SmartQuiz/IQMania/Views/Quiz/PlayQuiz.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcUXVpelxQbGF5UXVpei5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/karun.bhandari/Desktop/projects/SmartQuiz/Views/Quiz/View.cshtml]
+[X:/DOTNET/SmartQuiz/IQMania/Views/Quiz/View.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcUXVpelxWaWV3LmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/karun.bhandari/Desktop/projects/SmartQuiz/Views/Shared/Error.cshtml]
+[X:/DOTNET/SmartQuiz/IQMania/Views/Shared/Error.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXEVycm9yLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/karun.bhandari/Desktop/projects/SmartQuiz/Views/Shared/Search.cshtml]
+[X:/DOTNET/SmartQuiz/IQMania/Views/Shared/Search.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXFNlYXJjaC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/karun.bhandari/Desktop/projects/SmartQuiz/Views/Shared/_Nav.cshtml]
+[X:/DOTNET/SmartQuiz/IQMania/Views/Shared/_Nav.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXF9OYXYuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/karun.bhandari/Desktop/projects/SmartQuiz/Views/Shared/_ValidationScriptsPartial.cshtml]
+[X:/DOTNET/SmartQuiz/IQMania/Views/Shared/_ValidationScriptsPartial.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXF9WYWxpZGF0aW9uU2NyaXB0c1BhcnRpYWwuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/karun.bhandari/Desktop/projects/SmartQuiz/Views/_ViewImports.cshtml]
+[X:/DOTNET/SmartQuiz/IQMania/Views/_ViewImports.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcX1ZpZXdJbXBvcnRzLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/karun.bhandari/Desktop/projects/SmartQuiz/Views/_ViewStart.cshtml]
+[X:/DOTNET/SmartQuiz/IQMania/Views/_ViewStart.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcX1ZpZXdTdGFydC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/karun.bhandari/Desktop/projects/SmartQuiz/Views/Shared/_Layout.cshtml]
+[X:/DOTNET/SmartQuiz/IQMania/Views/Shared/_Layout.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXF9MYXlvdXQuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = b-e9jvzhwkqq
