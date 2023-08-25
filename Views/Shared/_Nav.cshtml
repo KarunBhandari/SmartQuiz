@@ -22,8 +22,8 @@
 
 
 <header>
-    
-        <nav class="navbar navbar-expand-md navbar-expand-lg navbar-expand-xl mynavbar">
+
+    <nav class="navbar navbar-expand-md navbar-expand-lg navbar-expand-xl mynavbar">
             
 
             <img class="navbar-brand img-fluid d-none d-sm-block" href="@Url.Action("Index", "Quiz")" src="~/Photos/Icon/Silver Icon.jpg" margin-top:0; margin-bottom:0" />
@@ -75,11 +75,11 @@
                                 @name
 
                             </a>
-                            <ul class="dropdown-menu">
-                            <li><a class="dropdown-item" href="@Url.Action("Logout", "Account")">Logout</a></li>
+                        <ul class="dropdown-menu">
+                            <li><a class="dropdown-item col-5 col-sm-9" href="@Url.Action("Logout", "Account")">Logout</a></li>
                             @*<li><a class="dropdown-item" href="@Url.Action("#", "Account")"></a></li>*@
 
-                            </ul>
+                </ul>
 
                         }
                         else
@@ -90,13 +90,13 @@
 
                             </a>
                         <ul class="dropdown-menu">
-                                <li class="dropdown-item"><a class="nav-link" href="@Url.Action("Login", "Account")">Login</a></li>
-                                <li class="dropdown-item"><a class="nav-link" href="@Url.Action("Signup", "Account")">Register</a></li>
+                                <li class="dropdown-item col-5 col-sm-9"><a class="nav-link" href="@Url.Action("Login", "Account")">Login</a></li>
+                                <li class="dropdown-item col-5 col-sm-9"><a class="nav-link" href="@Url.Action("Signup", "Account")">Register</a></li>
 
                             </ul>
 
                         }
-                    </li>
+                </li>
                 </ul>
 
                 
@@ -111,32 +111,33 @@
     
     
     <script type="text/javascript">
-
-
-            $(function(){
-            var xhr = $.ajax({
+        var userInfo = @Html.Raw(Json.Serialize(userInfo));
+        if (userInfo != null && userInfo.Role?.Contains("AdminUser") == true)
+        {
+        $(function(){
+                var xhr = $.ajax({
 
                 url: '@Url.Action("Count","Admin")',
-                type: "Get",
-                dataType: "json" // Add this to specify the expected data type
-            });
-
-            xhr.done(function (messages) {
-
-                var resp = messages.quizMessages;
-                // Assuming the response is an object with a "ResponseDescription" property
-
-                console.log(messages.responseDescription);
-                $('#msgbadge').html(resp);
-            });
-
-            xhr.fail(function (error) {
-                console.log(error);
-            });
+            type: "Get",
+            dataType: "json" // Add this to specify the expected data type
         });
 
-        
-        
+                xhr.done(function(messages) {
+
+                    var resp = messages.quizMessages;
+                    // Assuming the response is an object with a "ResponseDescription" property
+
+                    console.log(messages.responseDescription);
+            $('#msgbadge').html(resp);
+                });
+
+                xhr.fail(function(error) {
+                    console.log(error);
+                });
+            });
+
+
+        }
 
 
 

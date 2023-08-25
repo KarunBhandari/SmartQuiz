@@ -72,28 +72,37 @@ namespace IQMania.Repository
         public List<Questions> ReadIq(string dropdownValue)
         {
             List<Questions> questions = new();
-            using (SqlConnection con = new(Constr))
+            try
             {
-                SqlCommand cmd = new("spGetQuestions", con)
+                using (SqlConnection con = new(Constr))
                 {
-                    CommandType = CommandType.StoredProcedure
-                };
-                cmd.Parameters.AddWithValue("@flag", "GetMCQs");
-                cmd.Parameters.AddWithValue("@Category", dropdownValue);
-                con.Open();
-                SqlDataReader rdr = cmd.ExecuteReader();
-                while (rdr.Read())
-                {
-                    Questions questions1 = new()
+                    SqlCommand cmd = new("spGetQuestions", con)
                     {
-                        QID = Convert.ToInt32(rdr["Question_Number"]),
-                        Question = rdr["Questions"].ToString(),
-                        Answer = rdr["Answer"].ToString()
+                        CommandType = CommandType.StoredProcedure
                     };
-                    questions.Add(questions1);
+                    cmd.Parameters.AddWithValue("@flag", "GetMCQs");
+                    cmd.Parameters.AddWithValue("@Category", dropdownValue);
+                    con.Open();
+                    SqlDataReader rdr = cmd.ExecuteReader();
+                    while (rdr.Read())
+                    {
+                        Questions questions1 = new()
+                        {
+                            QID = Convert.ToInt32(rdr["Question_Number"]),
+                            Question = rdr["Questions"].ToString(),
+                            Answer = rdr["Answer"].ToString()
+                        };
+                        questions.Add(questions1);
+                    }
+                    return questions;
                 }
             }
-            return questions;
+            catch (Exception ex) 
+            {
+                Log.Error("Error occured while retriving catgory wise questions"+ ex.ToString());
+                return questions;
+            }
+            
         }
 
         public ResponseResult AddMCQ(AddQuiz addQuiz)
