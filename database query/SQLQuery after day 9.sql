@@ -3,10 +3,14 @@ Create table tblAccount(Id int Primary Key identity, FullName nvarchar(55), Emai
  
  Use IQ_Mania 
  Select * from tblAccount
+ Alter table tblAccount
+ ALter Column Password nvarchar(15)
 
  Update tblAccount
- Set Role='AdminUser'
- where Id=1
+Delete from tblAccount where Id = 1003
+ Select * from tblAccount
+
+ Select tblAccount.Password from tblAccount
  
  Alter procedure spcreateUser
  @Fullname nvarchar(55), @Email nvarchar(35),
@@ -21,7 +25,7 @@ Create table tblAccount(Id int Primary Key identity, FullName nvarchar(55), Emai
 	 Begin
 	   Insert into tblAccount (FullName, Email, Phone, Password) 
 	   values
-	   (@FullName, @Email,@Phone, @Password)
+	   (@FullName, @Email,@Phone,@Password)
 	   Set @responsecode = 201; Set @responsedescription = 'Successfully created user'
 	End
 	Else
@@ -36,7 +40,7 @@ Create table tblAccount(Id int Primary Key identity, FullName nvarchar(55), Emai
  Select @responsecode as ResponseCode, @responsedescription as ResponseDescription
 End
 Exec sp_helptext spcreateUser
-
+Exec spcreateUser 'Karun','kasas@ks.com','Abc123def@','45464', 'Signup'
 
 ALTER TABLE tblAccount
 ADD CONSTRAINT tbl_User_Role DEFAULT 'User' FOR [Role];
@@ -82,21 +86,45 @@ FROM (
 
 
 Select * from tblQuestions
-Select * from tblAccount
+
 
 Drop table tblAccount
 
-Alter procedure spGetLogininfo
-@Email nvarchar(35),
- @Password nvarchar(12)
-As
- Begin
- Select Id,FullName,Email, Phone, Role  from tblAccount (nolock)  where (Email = @Email) AND (Password = @Password) 
- End
+Alter procedure spGetLogininfo    
+@Email nvarchar(35),    
+ @Password nvarchar(12),    
+ @flag nvarchar(15)    
+As    
+ Begin    
+   Declare @responsecode int; Declare @responsedescription nvarchar(30)    
+   If(@flag='AuthLogin')    
+   Begin    
+ IF EXISTS (
+    SELECT 1
+    FROM tblAccount
+    WHERE (Email=@Email)
+      AND (Password = @Password))
+  Begin        
+   Set @responsecode=302; Set @responsedescription='Login Successful'   
+   Select @responsecode as ResponseCode, @responsedescription as ResponseDescription
+   Select Id,FullName,Email, Phone, Role  from tblAccount (nolock)  where (Email = @Email) AND (Password = @Password) 
+    
+  End    
+ Else    
+  Begin    
+  Set @responsecode=404; Set @responsedescription='User Not Found' 
+ Select @responsecode as ResponseCode, @responsedescription as ResponseDescription
+   End    
+ End    
+End
 
- declare @Email nvarchar(35), @Password nvarchar(12)
- Exec spGetLogininfo @Email = 'abc@def.com', @Password = 'abc123defA#'
+ Exec spGetLogininfo @flag='AuthLogin', @Email = 'kasas@ks.com', @Password = 'Abc123def'
+ Select Id, FullName, Email, Phone, Role from tblAccount where ((Email='hrsdff@sdf.ffv') AND PWDCOMPARE(Password,PWDENCRYPT('Dfdfdfdf@1')) = 1)
+ 
+ Select * from Questionaddedbyuser
+  
 
+  Exec spcreateUser 'Karun','kasas@ks.com','Abc123def@','45464', 'Signup'
  --Create a table to store user evaluation details
 -- Create PROCEDURE spCreateEvaluationTable
 --  @UID INT
@@ -269,7 +297,7 @@ truncate table Questionaddedbyuser
 
 Execute sp_helptext spcountrows
 --
-CREATE procedure spcountrows @flag nvarchar(10)  
+Alter procedure spcountrows @flag nvarchar(10)  
 As  
 Begin  
 if(@flag = 'AdminUser')  

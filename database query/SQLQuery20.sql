@@ -113,7 +113,7 @@ Begin
 End
 
 Use IQ_Mania
-Exec spSearchquestiontext '%Lion%', 'Search'
+
 
 Select * from Questionaddedbyuser
 Select * from tblQuestions
@@ -122,11 +122,14 @@ Select * from tblOptions
 
 
 
-Declare @qstn1 nvarchar(300)= 'Match the following:  a) Gatthigal - 1) Chitwan  b) The Lake where Cock roars - 2) Myagdi    c) Rupse jharana - 3) Myagdi  d) Bishajari Taal - 4) Baitadi'
-Declare @qstn2 nvarchar(300) = '<p>Match the following:</p><p> a) Gatthigal &nbsp &nbsp &nbsp 1) Chitwan </p> <p> b) The Lake where Cock roars &nbsp &nbsp 2) Myagdi </p> <p>  c) Rupse jharana &nbsp &nbsp 3) Myagdi </p> <p> d) Bishajari Taal &nbsp &nbsp 4) Baitadi </p>'
+Declare @qstn1 nvarchar(300)= 'Match the following:  a) 77 district - 1) BS 2074Ashwin 29    b) 4 districts added to himalayan region - 2) BS 2074Bhadra 25    c) Local Government conduction Rule - 3) BS 2072Ashoj 3  d) Division to 7 province - 4) BS 2074Bhadra 5'
+Declare @qstn2 nvarchar(300) = '<p>Match the following:</p><p> a) 77 district &nbsp &nbsp &nbsp 1) BS 2074Ashwin 29 </p> <p> b) 4 districts added to himalayan region &nbsp &nbsp 2) BS 2074Bhadra 25 </p> <p>  c) Local Government conduction Rule &nbsp &nbsp 3) BS 2072Ashoj 3 </p> <p> d) Division to 7 province &nbsp &nbsp 4) BS 2074Bhadra 5 </p>'
 UPDATE tblQuestions
-SET Questions = REPLACE(Questions,
-Questions, @qstn2)
+Set Questions = @qstn2 where Question_Number = 54
+Exec spSearchquestiontext '%Match%', 'Search'
+
+REPLACE(Questions,
+Questions, @qstn2) where Questions= '%'+@qstn1+ '%'
 Select * from tblQuestions WHERE Questions like '%'+@qstn1+'%'
  Select * from tblAccount
 

@@ -30,7 +30,8 @@
                     </tr>
                     @foreach(var item in Model.userAddedQuizzes)
                     {
-                    <tr class="mcqs">
+                        
+                        <tr class="mcqs">
                             <td><input class="itemid" value="@item.QID" /></td>
                             <td><input class="itemqstn" value="@item.QuizQuestion" /></td>
                             <td><input class="itemans" value="@item.QuizAnswer" /></td>
@@ -59,30 +60,26 @@
 
 @section Scripts{
     <script type="text/javascript">
-    $(function(){
+    $(document).ready(function(){
         debugger;
             $('.editqstn').click(function () {
                 debugger
                 var row = $(this).closest('.mcqs'); 
                 // Get the closest parent <tr> element
                 var itemId = row.find('.itemid').val();
-                console.log(itemId);
                 var itemQuestion = row.find('.itemqstn').val();
-                console.log();
                 var itemAnswer = row.find('.itemans').val();
-                console.log(itemAnswer);
                 var itemCategory = row.find('.itemcat').val();
-                console.log(itemCategory);
                 var itemOption1 = row.find('.itemop1').val();
-                console.log(itemOption1);
                 var itemOption2 = row.find('.itemop2').val();
-                console.log(itemOption2);
                 var itemOption3 = row.find('.itemop3').val();
-                console.log(itemOption3);
                 var itemOption4 = row.find('.itemop4').val();
-                console.log(itemOption4);
                
                 // Now you have all the values from the input fields for the corresponding row
+                row.find('.itemqstn').replaceWith('<input class="edit-itemqstn" value="' + qstn + '" />');
+                row.find('.editqstn').text('Save');
+                row.find('.btn-warning').hide();
+                row.find('.btn-danger').hide();
             });
 
 

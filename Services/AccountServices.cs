@@ -54,8 +54,8 @@ namespace IQMania.Repository
             try{
 
                 var reader = connection1.ExecuteDataset(Sql);
-                if (reader.Tables[1] != null) {
-                    var dbRes = reader.Tables[1];
+                if (reader.Tables[0] != null) {
+                    var dbRes = reader.Tables[0];
                     account.ResponseCode = Convert.ToInt32(dbRes.Rows[0]["ResponseCode"]);
                     account.ResponseDescription = (dbRes.Rows[0]["ResponseDescription"]).ToString();
                         }
@@ -63,7 +63,7 @@ namespace IQMania.Repository
                 
                     if (account.ResponseCode == 302)
                     {
-                    var dbRes1 = reader.Tables[0];
+                    var dbRes1 = reader.Tables[1];
 
                         account.UId = (dbRes1.Rows[0]["Id"].ToString());
                         account.Email = (dbRes1.Rows[0]["Email"].ToString());

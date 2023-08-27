@@ -85,7 +85,7 @@
                         else
                         {
 
-                        <a data-toggle="dropdown" class="list-group-item dropdown  mynavitem dropdown-toggle nav-link">
+                        <a data-toggle="dropdown" class=" dropdown  mynavitem dropdown-toggle nav-link">
                                 Hello! User
 
                             </a>
@@ -112,32 +112,29 @@
     
     <script type="text/javascript">
         var userInfo = @Html.Raw(Json.Serialize(userInfo));
-        if (userInfo != null && userInfo.Role?.Contains("AdminUser") == true)
-        {
-        $(function(){
-                var xhr = $.ajax({
 
-                url: '@Url.Action("Count","Admin")',
-            type: "Get",
-            dataType: "json" // Add this to specify the expected data type
-        });
+        $(function () {
+            debugger
+            if (userInfo != null && userInfo.role == "AdminUser") {
+            debugger
+                     var xhr = $.ajax({  
+                     url: '@Url.Action("Count","Admin")',
+                     type: "Get",
+                     dataType: "messages" // Add this to specify the expected data type
+                    });
 
                 xhr.done(function(messages) {
 
                     var resp = messages.quizMessages;
-                    // Assuming the response is an object with a "ResponseDescription" property
-
                     console.log(messages.responseDescription);
-            $('#msgbadge').html(resp);
+                    $('#msgbadge').html(resp);
                 });
 
                 xhr.fail(function(error) {
                     console.log(error);
                 });
-            });
-
-
         }
+        });
 
 
 

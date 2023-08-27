@@ -7,8 +7,8 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace IQMania.Controllers
 {
-    
-    
+
+    [Permission("AdminUser")]
     public class AdminController : Controller
     {
         private readonly IAdminServices _adminRepository;
@@ -17,7 +17,7 @@ namespace IQMania.Controllers
             _adminRepository = adminRepository;
         }
 
-        [Permission("AdminUser")]
+        
         public IActionResult Panel()
         {
             return View();
@@ -43,6 +43,7 @@ namespace IQMania.Controllers
         }
 
         [Permission("AdminUser")]
+        [HttpGet]
         public IActionResult Useraddedquestions()
         {
             Getaddquiz getaddquiz = new();
@@ -64,6 +65,7 @@ namespace IQMania.Controllers
         }
 
         [Permission("AdminUser")]
+        [HttpPost]
         public IActionResult Addquestions()
         {
             Getaddquiz getaddquiz = new();
