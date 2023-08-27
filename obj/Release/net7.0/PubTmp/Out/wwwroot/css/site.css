@@ -14,7 +14,7 @@ html {
 
 .mynavbar{
     font-family:Arial;
-    background-color: lightyellow;  
+    background-color: lightgreen;  
     width: 100%;
 }
 
@@ -37,8 +37,10 @@ a.dropdown.mynavitem.dropdown-toggle.nav-link::before {
 
 .mydiv{
     height:auto;
-    margin: 4px 7px 4px 4px;
-    border-color: chocolate
+    border-color: chocolate;
+    border :solid;
+    background-color:aliceblue;
+    position: sticky;
 }
 
 .nav-link{
@@ -48,7 +50,7 @@ a.dropdown.mynavitem.dropdown-toggle.nav-link::before {
 
 .noticetable {
     border: thick 2px;
-    margin: 4px, 7px, 2px, 4px
+    padding: 4px 7px 2px 4px;
 }
 
 .btn{

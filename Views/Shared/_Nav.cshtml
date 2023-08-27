@@ -114,13 +114,13 @@
         var userInfo = @Html.Raw(Json.Serialize(userInfo));
 
         $(function () {
-            debugger
+            
             if (userInfo != null && userInfo.role == "AdminUser") {
-            debugger
+            
                      var xhr = $.ajax({  
                      url: '@Url.Action("Count","Admin")',
                      type: "Get",
-                     dataType: "messages" // Add this to specify the expected data type
+                     dataType: "Json" // Add this to specify the expected data type
                     });
 
                 xhr.done(function(messages) {

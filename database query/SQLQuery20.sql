@@ -122,10 +122,10 @@ Select * from tblOptions
 
 
 
-Declare @qstn1 nvarchar(300)= 'Match the following:  a) 77 district - 1) BS 2074Ashwin 29    b) 4 districts added to himalayan region - 2) BS 2074Bhadra 25    c) Local Government conduction Rule - 3) BS 2072Ashoj 3  d) Division to 7 province - 4) BS 2074Bhadra 5'
-Declare @qstn2 nvarchar(300) = '<p>Match the following:</p><p> a) 77 district &nbsp &nbsp &nbsp 1) BS 2074Ashwin 29 </p> <p> b) 4 districts added to himalayan region &nbsp &nbsp 2) BS 2074Bhadra 25 </p> <p>  c) Local Government conduction Rule &nbsp &nbsp 3) BS 2072Ashoj 3 </p> <p> d) Division to 7 province &nbsp &nbsp 4) BS 2074Bhadra 5 </p>'
+Declare @qstn1 nvarchar(300)= 'Match the following Nepalese note and their date of Launch:  a) Rs 25 - 1) 2038 BS Baishakh 14  b) Rs 250 - 2) 2039 BS Kartik 22  c) Rs 20 - 3) 2052 BS Chaitra 29  d) Rs 2 - 4) 2052 BS Chaitra 28'
+Declare @qstn2 nvarchar(300) = '<p>Match the following Nepalese note and their date of Launch:</p><p> a) Rs 25 &nbsp &nbsp &nbsp 1) 2038 BS Baishakh 14 </p> <p> b) Rs 250 &nbsp &nbsp 2) 2039 BS Kartik 22 </p> <p>  c) Rs 20 &nbsp &nbsp 3) 2052 BS Chaitra 29 </p> <p> d)Rs 2 &nbsp &nbsp 4) 2052 BS Chaitra 28 </p>'
 UPDATE tblQuestions
-Set Questions = @qstn2 where Question_Number = 54
+Set Questions = @qstn2 where Question_Number = 91
 Exec spSearchquestiontext '%Match%', 'Search'
 
 REPLACE(Questions,

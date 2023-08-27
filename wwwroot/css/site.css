@@ -37,8 +37,10 @@ a.dropdown.mynavitem.dropdown-toggle.nav-link::before {
 
 .mydiv{
     height:auto;
-    margin: 4px 7px 4px 4px;
-    border-color: chocolate
+    border-color: chocolate;
+    border :solid;
+    background-color:aliceblue;
+    position: sticky;
 }
 
 .nav-link{

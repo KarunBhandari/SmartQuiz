@@ -118,6 +118,8 @@ As
  End    
 End
 
+Exec sp_helptext spGetLogininfo
+
  Exec spGetLogininfo @flag='AuthLogin', @Email = 'kasas@ks.com', @Password = 'Abc123def'
  Select Id, FullName, Email, Phone, Role from tblAccount where ((Email='hrsdff@sdf.ffv') AND PWDCOMPARE(Password,PWDENCRYPT('Dfdfdfdf@1')) = 1)
  

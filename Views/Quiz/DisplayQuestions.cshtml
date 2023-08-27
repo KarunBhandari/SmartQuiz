@@ -56,29 +56,10 @@
             dialogDiv.dialog();
         });
             $("#btncat").on("click",function () {
-                // Get the selected category value
-                var selectedCategory = $("#Id option:selected").val();
                
-                //jQuery.post({
-                //    url: '/Quiz/categoryWiseQuestions',
-                //    type:'POST',
-                //    contentType: 'application/x-www-form-urlencoded, charset=UTF-8',
-                //    data: { dropdownValuee: selectedCategory },
-                //    success: function () {
-            debugger;
+                var selectedCategory = $("#Id option:selected").val();
                     window.location.href="/Quiz/categoryWiseQuestions?id=" + selectedCategory;
-                    //},
-                    //error: function (xhr, textStatus, errorThrown) {
-                    //    // Handle the error response
-                    //    console.log("Error:", errorThrown);
-                    //}
-                //});
-
-
-
-                // Display the selected category in the console (for demonstration purposes)
-                //console.log("Selected category:", selectedCategory);
-                //};
+                    
             });
         
 

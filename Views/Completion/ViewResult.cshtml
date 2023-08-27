@@ -19,30 +19,37 @@
     <hr />
     <div class="container">
         <div class="row">
-            <div class="col-md-4 offset-md-4 col-sm-12" style="background-color:lawngreen; text-align:center">
+            <div class="col-lg-4 offset-md-4 col-sm-12" style="background-color:lawngreen; text-align:center">
                 <h3 style="color:rebeccapurple">IQ Mania</h3>
                 <h4>Status report for the practice quiz set</h4>
             </div>
+            
+            <hr />
+            
             <table>
                 <tr>
                     <th>User Id:</th>
-                    <td><p>@uid<p></td>
+                    <td><input class="btn border-black" type="text" value=@uid  readonly/></td>
                 </tr>
                 <tr>
                     <th>Name:</th>
-                    <td><p>@name</p></td>
+                    <td><input class="btn border-black" type="text" value=@name readonly /></td>
                 </tr>
                 <tr>
                     <th>Email:</th>
-                    <td><p>@email</p></td>
+                    <td><input class="btn border-black" type="text" value=@email readonly /></td>
                     <th>Contact:</th>
-                    <td><p>@phone</p></td>
+                    <td><input class="btn border-black" type="text" value=@phone readonly /></td>
                 </tr>
                 <tr>
                     <th> MarksObtained:</th>
-                    <td><p>@Model.Result</p></td>
+                    <td><input class="btn border-black" type="text" value=@Model.Result readonly /></td>
                 </tr>
             </table>
+            <hr />
+            <p class=" align-self-center offset-md-3 ">You solved @Model.QuestionResult.Count() questions out of 60 questions</p>
+            <hr />
+            
         </div>
     </div>
     <div class="container">
@@ -54,30 +61,32 @@
                 <th class="col-2">Answer</th>
                 <th class="col-2">SubmittedAnswer</th>
                 <th class="col-2">IsCorrect</th>
+                
                 @foreach (var item in Model.QuestionResult)
                 {
-                <tr>    
-        <td >
-                @Html.DisplayFor(model => item.QId)
-        </td>
-        
-            <td>
-                @Html.DisplayFor(model => item.Question)
-        </td>
-       
-            <td>
-                @Html.DisplayFor(model => item.Answer)
-        </td>
-        
-            <td>
-                @Html.DisplayFor(model => item.SubmittedAnswer)
-        </td>
-        
-            <td>
-                @Html.DisplayFor(model => item.IsCorrect)
-        </td>
-    </tr>
-    }
+                    <tr>    
+                        <td >
+                            @Html.DisplayFor(model => item.QId)
+                        </td>
+
+                        <td>
+                            @Html.DisplayFor(model => item.Question)
+                        </td>
+
+                        <td>
+                            @Html.DisplayFor(model => item.Answer)
+                        </td>
+
+                        <td>
+                            @Html.DisplayFor(model => item.SubmittedAnswer)
+                        </td>
+
+                        <td>
+                            @Html.DisplayFor(model => item.IsCorrect)
+                        </td>
+                    </tr>
+                    
+                }
         </table>
     </div>
 </div>

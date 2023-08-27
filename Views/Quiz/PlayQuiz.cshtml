@@ -18,7 +18,7 @@
      </a>
     </div>
 
-            <div id="stopwatch" class="mydiv col-md-3 offset-md-2">
+            <div id="stopwatch" class="mydiv d-flex justify-content-center w-25 align-self-center p-1 offset-lg-4">
                 <span id="minutes">00</span>:<span id="seconds">00</span>
             
     </div>
@@ -75,7 +75,7 @@
                 var counter = index + 1;
                 $(this).prepend(counter + ". ");
             });
-            debugger;
+            
             var stopwatch = $("#stopwatch");
             var minutesDisplay = $("#minutes");
             var secondsDisplay = $("#seconds");
@@ -87,12 +87,16 @@
             function updateStopwatch() {
                 var currentTime = new Date().getTime();
                 var elapsedTime = currentTime - startTime;
+                if (elapsedTime >= 180000) {
+                    window.location.href = '@Url.Action("ExamFinished", "Completion")';
+                }
 
                 var minutes = Math.floor(elapsedTime / 60000);
                 var seconds = Math.floor((elapsedTime % 60000) / 1000);
-
-                minutesDisplay.text(String(minutes).padStart(2, "0"));
-                secondsDisplay.text(String(seconds).padStart(2, "0"));
+                
+                     minutesDisplay.text(String(minutes).padStart(2, "0"));
+                     secondsDisplay.text(String(seconds).padStart(2, "0"));
+                
             }
 
             $(window).on('unload',function(){
