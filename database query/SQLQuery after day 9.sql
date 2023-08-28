@@ -211,7 +211,7 @@ WHEN NOT MATCHED THEN
 	End
 	
 
-   Exec spMainTestResult @UID=4, @QuestionId=5, @Selectedanswer='Antarasan and Parmasan ', @Usertoken = 45457
+   Exec spMainTestResult @UID=1, @QuestionId=4, @Selectedanswer='Antarasan and Parmasan ', @Usertoken = 45457
    Select * from UserEvaluationTable
    Delete Top(1) from UserEvaluationTable
    
@@ -233,7 +233,7 @@ truncate table UserEvaluationTable
 Update tblQuestions
 Set Answer = RTRIM(LTRIM(Replace(Answer, Char(9), '')))
 Use IQ_Mania
-Select * from tblQuestions
+Select * from UserEvaluationTable
 
 Alter procedure spViewResult
 @UID int, @session bigint
@@ -245,7 +245,7 @@ As
  where UID=@UID and Session=@session
 End
 
-Execute sp_helptext spViewResult 4,45457
+Execute  spViewResult 1,45457
 
 UPDATE tblOptions
 SET Question = tblQuestions.Question_Number
