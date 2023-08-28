@@ -16,7 +16,7 @@ namespace IQMania.Models
     public class Marksheet
     {
         public IEnumerable<UserResult> QuestionResult { get; set; }
-        public double Percentage { get; set; }
+        public int Percentage { get; set; }
         public int Accuracy { get; set; }
         public double Result { get; set; }
     }

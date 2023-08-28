@@ -13,6 +13,7 @@ namespace IQMania.Controllers
             
         }
 
+       
         public IActionResult ExamFinished()
         {
             return View();

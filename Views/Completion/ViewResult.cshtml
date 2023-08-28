@@ -9,12 +9,14 @@
     var name = userInfo?.Name;
     var email = userInfo?.Email;
     var phone = userInfo?.Phonenumber;
+    var percentage = 0.0;
 }
 <h4>UserResult</h4>
 <div>
     @if (Model == null)
     {
         @ViewBag.UserResult
+        
     }
     else
     {
@@ -22,7 +24,7 @@
 
         var Solvedqstnlist = Model.QuestionResult.ToList();
         var solvedqstn = Solvedqstnlist.Count() > 0 ? Solvedqstnlist.Count() : 0;
-
+         percentage = @Model.Percentage;
 
 
         <hr />
@@ -58,7 +60,15 @@
             <hr />
                 <p class=" align-self-center offset-md-3 ">You solved @solvedqstn questions out of 40 questions and @Model.Accuracy were correct.</p>
             <hr />
-            <p>A</p>
+            <p>Accuracy Status:</p>
+                <div id="outerDiv"  style="background-color:#EEEEEE;
+         height:20px; width:500px; padding:5px">
+                    <div id="innerDiv" style="background-color:red; height:19px;
+             width:0px; color:white; text-align:center">
+                    </div>
+                    </div>
+                    <br>
+                    <hr>                                                                                                                                                                                                                                                                                    
         </div>
     </div>
     <div class="container">
@@ -100,4 +110,34 @@
     </div>
     }
 </div>
+
+@section Scripts{
+    @{
+    var percentage = 0;
+
+    if (Model != null) {
+        percentage = Model.Percentage;
+    }
+}
+    <script type="text/javascript">
+        
+        
+        $(function(){
+        debugger
+            showProgress(@percentage);
+
+        function showProgress(percent){
+            $('#innerDiv').animate({
+            'width': (500*percent)/100},3000);
+            $({counter: 1}).animate({counter: percent},
+            {duration: 3000,
+            step: function(){
+                $('#innerDiv').text(Math.ceil(this.counter)+'%');
+            }
+            })
+        }
+        });
+        
+    </script>
+}
 
