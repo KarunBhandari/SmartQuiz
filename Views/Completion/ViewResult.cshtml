@@ -9,16 +9,25 @@
     var name = userInfo?.Name;
     var email = userInfo?.Email;
     var phone = userInfo?.Phonenumber;
-    
 }
-
-
 <h4>UserResult</h4>
 <div>
-    
-    <hr />
-    <div class="container">
-        <div class="row">
+    @if (Model == null)
+    {
+        @ViewBag.UserResult
+    }
+    else
+    {
+
+
+        var Solvedqstnlist = Model.QuestionResult.ToList();
+        var solvedqstn = Solvedqstnlist.Count() > 0 ? Solvedqstnlist.Count() : 0;
+
+
+
+        <hr />
+        <div class="container">
+            <div class="row">
             <div class="col-lg-4 offset-md-4 col-sm-12" style="background-color:lawngreen; text-align:center">
                 <h3 style="color:rebeccapurple">IQ Mania</h3>
                 <h4>Status report for the practice quiz set</h4>
@@ -47,9 +56,9 @@
                 </tr>
             </table>
             <hr />
-            <p class=" align-self-center offset-md-3 ">You solved @Model.QuestionResult.Count() questions out of 60 questions</p>
+                <p class=" align-self-center offset-md-3 ">You solved @solvedqstn questions out of 40 questions and @Model.Accuracy were correct.</p>
             <hr />
-            
+            <p>A</p>
         </div>
     </div>
     <div class="container">
@@ -89,5 +98,6 @@
                 }
         </table>
     </div>
+    }
 </div>
 

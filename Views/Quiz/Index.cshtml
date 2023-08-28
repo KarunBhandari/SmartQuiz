@@ -17,14 +17,14 @@
             </button>
             <br />
         </div>
-        <div class="modal" id="searchdiv" tabindex="-1">
-            <div class="modal-dialog">
-                <div class="modal-content">
-                    <div class="modal-header">
+        <div class="modal modal-lg" id="searchdiv" tabindex="-1">
+            <div class="modal-dialog modal-lg">
+                <div class="modal-content modal-lg">
+                    <div class="modal-header modal-lg">
                         <h5 class="modal-title">Search Result:</h5>
                         <button type="button" class="btn-close" data-target="#searchdiv" data-toggle="modal" aria-label="Close"></button>
                     </div>
-                    <div class="modal-body" id="searchmodalbody">
+                    <div class="modal-body modal-lg" id="searchmodalbody">
                         <table class=" table table-bordered border-black">
                             <tr>
                                 
@@ -199,7 +199,7 @@
                         $('#SearchDescription').html(qstn.responseDescription + '<hr />');
                     for (var i = 0; i < questions.length; i++) {
                         var a = questions[i];
-                            $('#searchmodalbody table').append('<tr>'+'<td>'+a.qid+'</td>'+'<td>'+a.question+'</td>'+'<td>'+a.answer+'</td>');
+                            $('#searchmodalbody table').append('<tr>'+'<td>'+a.qid+')'+'</td>'+'<td>'+a.question+'</td>'+'<td>'+a.answer+'</td>');
                     }
                         
                         

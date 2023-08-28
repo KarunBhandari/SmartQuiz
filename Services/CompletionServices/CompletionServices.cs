@@ -50,7 +50,9 @@ namespace IQMania.Repository.Completion
                  _ = cmd.ExecuteNonQuery();
                 SqlDataReader rdr = cmd.ExecuteReader();
                     double marks = 0;
+
                     int qno = 1;
+                    int accuratecount = 0;
                     var markledger = new List<UserResult>();
                     while (rdr.Read())
                     {
@@ -70,16 +72,26 @@ namespace IQMania.Repository.Completion
                         if(status == 1)
                         {
                             marks= marks+status*2;
+                            accuratecount++;
+                            
                         }
+
                         else
                         {
                             marks = marks - 0.5;
                         }
+                        results.Accuracy = accuratecount;
                         
 
                         
                     }
                     results.Result = marks;
+                    if (marks > 0)
+                    {
+                        results.Percentage = (results.Accuracy)*100 / results.QuestionResult.Count();
+                        
+                    }
+                    else { results.Percentage = 0; }
                 }
                 return results;
             }

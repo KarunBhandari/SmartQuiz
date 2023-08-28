@@ -20,9 +20,13 @@ namespace IQMania.Controllers
         public IActionResult ViewResult()
         {
             Marksheet userResult = _repository.ViewResult(HttpContext);
+            if (userResult.QuestionResult != null)
+            {
 
-
-            return View(userResult);
+                return View(userResult);
+            }
+            ViewBag.UserResult = "No datas to Display for user";
+            return View();
         }
 
         

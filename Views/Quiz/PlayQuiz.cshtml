@@ -11,18 +11,19 @@
 @if(Model !=null){
 
 <div class="containar" style="font-family:Arial" >
-  <div class="row">
+  
             
     <div class="container" style="background-color:lawngreen; text-align:center"><a>
                     Let's start IQ Mania Quest @Context.User.FindFirst("Name")?.Value !!
      </a>
     </div>
+    <hr>
 
-            <div id="stopwatch" class="mydiv d-flex justify-content-center w-25 align-self-center p-1 offset-lg-4">
+            <div id="stopwatch" class="sticky-top mydiv d-flex justify-content-center w-25 align-self-center p-1 offset-4">
                 <span id="minutes">00</span>:<span id="seconds">00</span>
             
     </div>
-    </div>
+    
     <div style="margin-top:10px">
     <table class="table table-hover table-striped">
         @foreach (var item in Model)
@@ -32,7 +33,7 @@
              <div class="row">
               <div class="col-11">
                                 <div class="itemQNO">
-                @item.Questions
+                @*@JsonSerializer.Serialize(@item.Questions)*@
                                 </div>
               </div>
              </div>
@@ -88,6 +89,7 @@
                 var currentTime = new Date().getTime();
                 var elapsedTime = currentTime - startTime;
                 if (elapsedTime >= 180000) {
+                    $(".table").wrap('<fieldset disabled></fieldset>');
                     window.location.href = '@Url.Action("ExamFinished", "Completion")';
                 }
 

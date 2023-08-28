@@ -147,7 +147,7 @@ Exec sp_helptext spGetLogininfo
 --        OptionSelected NVARCHAR(70),
 --        Answer NVARCHAR(70)
 --      )'
-    
+
 --    EXEC sp_executesql @SqlStatement
 --  END
 --END
@@ -245,7 +245,7 @@ As
  where UID=@UID and Session=@session
 End
 
-Execute spViewResult 4,45457
+Execute sp_helptext spViewResult 4,45457
 
 UPDATE tblOptions
 SET Question = tblQuestions.Question_Number
