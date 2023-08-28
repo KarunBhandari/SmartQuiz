@@ -40,7 +40,7 @@ a.dropdown.mynavitem.dropdown-toggle.nav-link::before {
     border-color: chocolate;
     border :solid;
     background-color:aliceblue;
-    position: sticky;
+    margin-top:0px
 }
 
 .nav-link{
